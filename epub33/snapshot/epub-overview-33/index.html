@@ -940,7 +940,7 @@
         "Daniel Weck"
       ],
       "title": "EPUB 3.3",
-      "href": "https://www.w3.org/TR/epub-33/",
+      "href": "../epub-33/index.html",
       "publisher": "W3C",
       "id": "epub-33"
     },
@@ -953,7 +953,7 @@
         "Daniel Weck"
       ],
       "title": "EPUB Reading Systems 3.3",
-      "href": "https://www.w3.org/TR/epub-rs-33/",
+      "href": "../epub-rs-33/index.html",
       "publisher": "W3C"
     },
     "EPUB-CHANGES-33": {
@@ -981,7 +981,7 @@
         "Matt Garrish"
       ],
       "title": "EPUB Multiple-Rendition Publications 1.1",
-      "href": "https://www.w3.org/TR/epub-multi-rend-11/",
+      "href": "../epub-multi-rend-11/index.html",
       "publisher": "W3C"
     }
   },
@@ -1078,8 +1078,8 @@
 						href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>], which represents the second minor
 				revision of the standard. The substantive changes since EPUB 3.2 [<cite><a class="bibref"
 						data-link-type="biblio" href="#bib-epub-32" title="EPUB 3.2">EPUB-32</a></cite>] are documented
-				in a separate <a href="https://www.w3.org/TR/epub-33/#changes-latest">section</a> in the EPUB 3.3
-				document itself. </p>
+				in a separate <a href="../epub-33/index.html#changes-latest">section</a> in the EPUB 3.3 document
+				itself. </p>
 		</section>
 		<section id="sotd" class="introductory">
 			<h2>Status of This Document</h2>
@@ -1194,8 +1194,8 @@
 					href="#sec-features"></a></h2>
 
 			<p>This section covers the major features of EPUB, including important components and topics that apply to
-				the process of authoring <a href="https://www.w3.org/TR/epub-33/#dfn-epub-publication">EPUB
-					Publications</a> as a whole.</p>
+				the process of authoring <a href="../epub-33/index.html#dfn-epub-publication">EPUB Publications</a> as a
+				whole.</p>
 
 			<figure id="fig-the-following-example-visually-represents-the-structure-of-an-epub-publication">
 				<figcaption>Figure <bdi class="figno">1</bdi>
@@ -1210,34 +1210,33 @@
 				<h3 id="x1-1-package-document"><bdi class="secno">1.1 </bdi>Package Document<a class="self-link"
 						aria-label="§" href="#sec-package-file"></a></h3>
 
-				<p>Every EPUB Publication is represented by a <a
-						href="https://www.w3.org/TR/epub-33/#dfn-package-document">Package Document</a>. The Package
-					Document specifies all the resources required to render that representation of the content. The
-					Package Document also defines a reading order for linear consumption, and associates metadata and
-					navigation information.</p>
+				<p>Every EPUB Publication is represented by a <a href="../epub-33/index.html#dfn-package-document"
+						>Package Document</a>. The Package Document specifies all the resources required to render that
+					representation of the content. The Package Document also defines a reading order for linear
+					consumption, and associates metadata and navigation information.</p>
 
 				<p>The Package Document represents a significant improvement on a typical Web site. A Web site, for
 					example, embeds references to its resources within its content, which, while a simple and flexible
 					means of identifying resources, makes it difficult to enumerate all the resources required to render
 					it. In addition, there is no standard way for a Web site to define that a sequence of pages make up
-					a larger publication, which is precisely what EPUB's <a
-						href="https://www.w3.org/TR/epub-33/#sec-spine-elem"><code>spine</code> element</a> [<cite><a
-							class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
-						>EPUB-33</a></cite>] does (i.e., it provides an external declarative means to explicitly specify
-					navigation through a collection of documents). Finally, the Package Document defines a standard way
-					to represent metadata globally applicable to a collection of pages.</p>
+					a larger publication, which is precisely what EPUB's <a href="../epub-33/index.html#sec-spine-elem"
+							><code>spine</code> element</a> [<cite><a class="bibref" data-link-type="biblio"
+							href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>] does (i.e., it provides an external
+					declarative means to explicitly specify navigation through a collection of documents). Finally, the
+					Package Document defines a standard way to represent metadata globally applicable to a collection of
+					pages.</p>
 
-				<p>The Package Document also includes a <a href="https://www.w3.org/TR/epub-33/#sec-collection-elem"
+				<p>The Package Document also includes a <a href="../epub-33/index.html#sec-collection-elem"
 							><code>collection</code> element</a> [<cite><a class="bibref" data-link-type="biblio"
 							href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>], which allows grouping of logically
-					related <a href="https://www.w3.org/TR/epub-33/#dfn-publication-resource">Publication Resources</a>.
-					This element exists to enable the development of specialized content identification, processing and
+					related <a href="../epub-33/index.html#dfn-publication-resource">Publication Resources</a>. This
+					element exists to enable the development of specialized content identification, processing and
 					rendering features, such as the ability to define embedded preview content, or assemble an index or
 					dictionary from its constituent XHTML Content Documents.</p>
 
-				<p>The Package Document is specified in the dedicated <a
-						href="https://www.w3.org/TR/epub-33/#sec-nav-def-hidden">section</a> of [<cite><a class="bibref"
-							data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>].</p>
+				<p>The Package Document is specified in the dedicated <a href="../epub-33/index.html#sec-nav-def-hidden"
+						>section</a> of [<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
+							title="EPUB 3.3">EPUB-33</a></cite>].</p>
 			</section>
 
 			<section id="sec-nav">
@@ -1260,14 +1259,13 @@
 						recipe).</p>
 
 					<p>Each EPUB Publication defines at least one such logical ordering of all its top-level content
-						(the <a href="https://www.w3.org/TR/epub-33/#sec-spine-elem">spine</a> [<cite><a class="bibref"
+						(the <a href="../epub-33/index.html#sec-spine-elem">spine</a> [<cite><a class="bibref"
 								data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>]), as
 						well as a declarative table of contents (the <a
-							href="https://www.w3.org/TR/epub-33/#dfn-epub-navigation-document">EPUB Navigation
-							Document</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
-								title="EPUB 3.3">EPUB-33</a></cite>]). EPUB Publications make these data structures
-						available in a machine-readable way <em>external</em> to the content, simplifying their
-						discovery and use.</p>
+							href="../epub-33/index.html#dfn-epub-navigation-document">EPUB Navigation Document</a>
+								[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
+								>EPUB-33</a></cite>]). EPUB Publications make these data structures available in a
+						machine-readable way <em>external</em> to the content, simplifying their discovery and use.</p>
 
 					<p>EPUB Publications are not limited to the linear ordering of their contents, nor do they preclude
 						linking in arbitrary ways&#160;—&#160;just like the Web, EPUB Publications are built on
@@ -1280,10 +1278,10 @@
 							class="self-link" aria-label="§" href="#sec-nav-nav-doc"></a></h4>
 
 					<p>Each EPUB Publication contains a special XHTML Content Document called the <a
-							href="https://www.w3.org/TR/epub-33/#dfn-epub-navigation-document">EPUB Navigation
-							Document</a>, which uses the [<cite><a class="bibref" data-link-type="biblio"
-								href="#bib-html" title="HTML Standard">HTML</a></cite>] <code>nav</code> element to
-						define human- and machine-readable navigation information.</p>
+							href="../epub-33/index.html#dfn-epub-navigation-document">EPUB Navigation Document</a>,
+						which uses the [<cite><a class="bibref" data-link-type="biblio" href="#bib-html"
+								title="HTML Standard">HTML</a></cite>] <code>nav</code> element to define human- and
+						machine-readable navigation information.</p>
 
 					<p>The Navigation Document contains baseline accessibility and navigation support, but also features
 						to enhance navigation for all users. Prime among these are support for internationalization (for
@@ -1292,18 +1290,17 @@
 						links).</p>
 
 					<p>Navigation Documents also provide a flexible means of tailoring the navigation display using CSS
-						and the <a href="https://www.w3.org/TR/epub-33/#sec-nav-def-hidden"><code>hidden</code>
-							attribute</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
-								title="EPUB 3.3">EPUB-33</a></cite>] while not impacting access to information for
-						accessible Reading Systems.</p>
+						and the <a href="../epub-33/index.html#sec-nav-def-hidden"><code>hidden</code> attribute</a>
+								[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
+								>EPUB-33</a></cite>] while not impacting access to information for accessible Reading
+						Systems.</p>
 
 					<p>The structure and semantics of Navigation Documents are specified in the relevant <a
-							href="https://www.w3.org/TR/epub-33/#sec-nav-def-hidden">section</a> of [<cite><a
-								class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
-							>EPUB-33</a></cite>].</p>
+							href="../epub-33/index.html#sec-nav-def-hidden">section</a> of [<cite><a class="bibref"
+								data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>].</p>
 
 					<p>The structure and semantics of Navigation Documents are defined in specified in the dedicated <a
-							href="https://www.w3.org/TR/epub-33/#sec-nav">section</a> of&#160;[<cite><a class="bibref"
+							href="../epub-33/index.html#sec-nav">section</a> of&#160;[<cite><a class="bibref"
 								data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>].</p>
 
 				</section>
@@ -1315,20 +1312,20 @@
 						href="#sec-metadata"></a></h3>
 
 				<p>EPUB Publications provide a rich array of options for adding metadata. Each Package Document includes
-					a dedicated <a href="https://www.w3.org/TR/epub-33/#sec-metadata-elem"><code>metadata</code>
-						section</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
-							title="EPUB 3.3">EPUB-33</a></cite>] for general information about the EPUB Publication,
-					allowing titles, authors, identifiers and other information about the EPUB Publication to be easily
-					accessed. It also provides the means to attach complete bibliographic records using the <a
-						href="https://www.w3.org/TR/epub-33/#sec-link-elem"><code>link</code> element</a> [<cite><a
+					a dedicated <a href="../epub-33/index.html#sec-metadata-elem"><code>metadata</code> section</a>
+							[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
+							>EPUB-33</a></cite>] for general information about the EPUB Publication, allowing titles,
+					authors, identifiers and other information about the EPUB Publication to be easily accessed. It also
+					provides the means to attach complete bibliographic records using the <a
+						href="../epub-33/index.html#sec-link-elem"><code>link</code> element</a> [<cite><a
 							class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
 						>EPUB-33</a></cite>].</p>
 
-				<p>The Package Document also allows a <a href="https://www.w3.org/TR/epub-33/#dfn-unique-identifier"
-						>Unique Identifier</a> to be established for the EPUB Publication using the <a
-						href="https://www.w3.org/TR/epub-33/#attrdef-package-unique-identifier"
-							><code>unique-identifier</code> attribute</a> [<cite><a class="bibref"
-							data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>].</p>
+				<p>The Package Document also allows a <a href="../epub-33/index.html#dfn-unique-identifier">Unique
+						Identifier</a> to be established for the EPUB Publication using the <a
+						href="../epub-33/index.html#attrdef-package-unique-identifier"><code>unique-identifier</code>
+						attribute</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
+							title="EPUB 3.3">EPUB-33</a></cite>].</p>
 
 				<p>XHTML Content Documents also include the means of annotating document markup with rich metadata,
 					making them more semantically meaningful and useful both for processing and accessibility purposes.
@@ -1343,16 +1340,15 @@
 				<h3 id="x1-4-content-documents"><bdi class="secno">1.4 </bdi>Content Documents<a class="self-link"
 						aria-label="§" href="#sec-content-docs"></a></h3>
 
-				<p>Each EPUB Publication contains one or more <a
-						href="https://www.w3.org/TR/epub-33/#dfn-epub-content-document">EPUB Content Documents</a>, as
-					defined in the dedicated <a href="https://www.w3.org/TR/epub-33/#sec-contentdocs">section</a>
-							of&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
-							title="EPUB 3.3">EPUB-33</a></cite>]. These are XHTML or SVG documents that describe the
-					readable content and reference associated media resources (e.g., images, audio, and video
-					clips).</p>
+				<p>Each EPUB Publication contains one or more <a href="../epub-33/index.html#dfn-epub-content-document"
+						>EPUB Content Documents</a>, as defined in the dedicated <a
+						href="../epub-33/index.html#sec-contentdocs">section</a> of&#160;[<cite><a class="bibref"
+							data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>]. These are
+					XHTML or SVG documents that describe the readable content and reference associated media resources
+					(e.g., images, audio, and video clips).</p>
 
-				<p><a href="https://www.w3.org/TR/epub-33/#dfn-xhtml-content-document">XHTML Content Documents</a> are
-					defined by a profile of&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-html"
+				<p><a href="../epub-33/index.html#dfn-xhtml-content-document">XHTML Content Documents</a> are defined by
+					a profile of&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-html"
 							title="HTML Standard">HTML</a></cite>].</p>
 			</section>
 
@@ -1365,23 +1361,21 @@
 					children's books, comics and manga, magazines, and many other content forms.</p>
 
 				<p>EPUB 3 includes metadata that allows the creation of <a
-						href="https://www.w3.org/TR/epub-33/#sec-fixed-layouts">fixed-layout XHTML Content Documents</a>
+						href="../epub-33/index.html#sec-fixed-layouts">fixed-layout XHTML Content Documents</a>
 							[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
 							>EPUB-33</a></cite>], in addition to existing capabilities for fixed layouts in SVG. This
-					metadata enables the control of the <a
-						href="https://www.w3.org/TR/epub-33/#sec-fxl-content-dimensions">page
-							dimensions</a>&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
+					metadata enables the control of the <a href="../epub-33/index.html#sec-fxl-content-dimensions">page
+						dimensions</a>&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
 							title="EPUB 3.3">EPUB-33</a></cite>], creating a canvas on which elements can be absolutely
 					positioned.</p>
 
 				<p>The metadata does not just flag whether content is to be fixed or reflowed, but also allows Authors
-					to specify the desired <a href="https://www.w3.org/TR/epub-33/#orientation">orientation of
+					to specify the desired <a href="../epub-33/index.html#orientation">orientation of
 							pages</a>&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
-							title="EPUB 3.3">EPUB-33</a></cite>], when to <a
-						href="https://www.w3.org/TR/epub-33/#spread">create synthetic spreads</a>&#160;[<cite><a
-							class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
-						>EPUB-33</a></cite>], and <a href="https://www.w3.org/TR/epub-33/#page-spread">how to position
-						pages</a>&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
+							title="EPUB 3.3">EPUB-33</a></cite>], when to <a href="../epub-33/index.html#spread">create
+						synthetic spreads</a>&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
+							title="EPUB 3.3">EPUB-33</a></cite>], and <a href="../epub-33/index.html#page-spread">how to
+						position pages</a>&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
 							title="EPUB 3.3">EPUB-33</a></cite>] within those spreads, providing a broad range of
 					control over the presentation of EPUB Publications.</p>
 			</section>
@@ -1419,20 +1413,20 @@
 						href="#sec-multimedia"></a></h3>
 
 				<p>EPUB 3 supports audio and video embedded in <a
-						href="https://www.w3.org/TR/epub-33/#dfn-xhtml-content-document">XHTML Content Documents</a> via
-					the [<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard"
-						>HTML</a></cite>] <code>audio</code> and <code>video</code> elements, inheriting all the
+						href="../epub-33/index.html#dfn-xhtml-content-document">XHTML Content Documents</a> via the
+							[<cite><a class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard"
+							>HTML</a></cite>] <code>audio</code> and <code>video</code> elements, inheriting all the
 					functionality and features these elements provide. For more information on audio and video formats,
-					refer to the section on <a href="https://www.w3.org/TR/epub-33/#sec-core-media-types">core media
-						types</a>&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
+					refer to the section on <a href="../epub-33/index.html#sec-core-media-types">core media
+							types</a>&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
 							title="EPUB 3.3">EPUB-33</a></cite>].</p>
 
 				<p>Another key multimedia feature in EPUB 3 is the inclusion of <a
-						href="https://www.w3.org/TR/epub-33/#dfn-media-overlay-document">Media Overlay Documents</a>
-							[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
-							>EPUB-33</a></cite>]. When pre-recorded narration is available for an EPUB Publication,
-					Media Overlays provide the ability to synchronize that audio with the text of a Content Document
-					(see also <a href="#sec-access-overlays" class="sec-ref">§&#160;<bdi class="secno">3.4 </bdi>Aural
+						href="../epub-33/index.html#dfn-media-overlay-document">Media Overlay Documents</a> [<cite><a
+							class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
+						>EPUB-33</a></cite>]. When pre-recorded narration is available for an EPUB Publication, Media
+					Overlays provide the ability to synchronize that audio with the text of a Content Document (see also
+						<a href="#sec-access-overlays" class="sec-ref">§&#160;<bdi class="secno">3.4 </bdi>Aural
 						Renditions and Media Overlays</a>).</p>
 			</section>
 
@@ -1454,8 +1448,8 @@
 				<p>EPUB 3 also supports both obfuscated and regular font resources for both OpenType and WOFF font
 					formats. Support for obfuscated font resources is required to accommodate font licensing
 					restrictions for many commercially available fonts. See the dedicated <a
-						href="https://www.w3.org/TR/epub-33/#sec-resource-obfuscation">section on Resource
-						Obfuscation</a> in&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
+						href="../epub-33/index.html#sec-resource-obfuscation">section on Resource Obfuscation</a>
+							in&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
 							title="EPUB 3.3">EPUB-33</a></cite>] for more details.</p>
 
 			</section>
@@ -1469,9 +1463,9 @@
 							class="bibref" data-link-type="biblio" href="#bib-html" title="HTML Standard"
 						>HTML</a></cite>] and [<cite><a class="bibref" data-link-type="biblio" href="#bib-svg2"
 							title="Scalable Vector Graphics (SVG) 2">SVG2</a></cite>] (refer to the section on <a
-						href="https://www.w3.org/TR/epub-33/#sec-scripted-content">Scripting</a>&#160;[<cite><a
-							class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
-						>EPUB-33</a></cite>] for more information).</p>
+						href="../epub-33/index.html#sec-scripted-content">Scripting</a>&#160;[<cite><a class="bibref"
+							data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>] for more
+					information).</p>
 
 				<p>It is important to note, however, that EPUB 3 does not require scripting support in Reading Systems,
 					and scripting might be disabled for security reasons.</p>
@@ -1480,10 +1474,9 @@
 					that are different from scripting within a Web browser. For example, typical same-origin policies
 					are not applicable to content that has been downloaded to a user's local system. Therefore, it is
 					strongly encouraged that scripting be limited to container constrained contexts, as further
-					described in the section on <a
-						href="https://www.w3.org/TR/epub-33/#sec-scripted-container-constrained">Container-Constrained
-						Scripts</a>&#160;[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
-							title="EPUB 3.3">EPUB-33</a></cite>].</p>
+					described in the section on <a href="../epub-33/index.html#sec-scripted-container-constrained"
+						>Container-Constrained Scripts</a>&#160;[<cite><a class="bibref" data-link-type="biblio"
+							href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>].</p>
 
 				<p>In other words, consider limiting scripting to cases where it is essential to the user experience,
 					since it greatly increases the likelihood that content will not be portable across all Reading
@@ -1506,22 +1499,20 @@
 									data-link-type="biblio" href="#bib-pronunciation-lexicon"
 									title="Pronunciation Lexicon Specification (PLS) Version 1.0"
 									>PRONUNCIATION-LEXICON</a></cite>] enables Authors to provide pronunciation rules
-							that apply to the entire EPUB Publication. Refer to <a
-								href="https://www.w3.org/TR/epub-33/#sec-pls">Pronunciation Lexicons</a> [<cite><a
-									class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
-									>EPUB-33</a></cite>] for more information.</p>
+							that apply to the entire EPUB Publication. Refer to <a href="../epub-33/index.html#sec-pls"
+								>Pronunciation Lexicons</a> [<cite><a class="bibref" data-link-type="biblio"
+									href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>] for more information.</p>
 					</dd>
 					<dt>Inline SSML Phonemes</dt>
 					<dd>
 						<p> The incorporation of SSML phonemes functionality [<cite><a class="bibref"
 									data-link-type="biblio" href="#bib-ssml"
 									title="Speech Synthesis Markup Language (SSML) Version 1.1">SSML</a></cite>]
-							directly into a <a href="https://www.w3.org/TR/epub-33/#dfn-epub-content-document">EPUB
-								Content Document</a> enables fine-grained pronunciation control, taking precedence over
-							default pronunciation rules and/or referenced pronunciation lexicons (as provided by the PLS
-							format mentioned above). Refer to <a
-								href="https://www.w3.org/TR/epub-33/#sec-xhtml-ssml-attrib">SSML Attributes</a>
-									[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
+							directly into a <a href="../epub-33/index.html#dfn-epub-content-document">EPUB Content
+								Document</a> enables fine-grained pronunciation control, taking precedence over default
+							pronunciation rules and/or referenced pronunciation lexicons (as provided by the PLS format
+							mentioned above). Refer to <a href="../epub-33/index.html#sec-xhtml-ssml-attrib">SSML
+								Attributes</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
 									title="EPUB 3.3">EPUB-33</a></cite>] for more information.</p>
 					</dd>
 				</dl>
@@ -1543,7 +1534,7 @@
 					network transport or file system specifics.</p>
 
 				<p>An EPUB Publication's representation as a container file is specified in the dedicated <a
-						href="https://www.w3.org/TR/epub-33/#sec-ocf">section</a> of&#160;[<cite><a class="bibref"
+						href="../epub-33/index.html#sec-ocf">section</a> of&#160;[<cite><a class="bibref"
 							data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>].</p>
 
 			</section>
@@ -1559,10 +1550,10 @@
 
 				<p>EPUB 3 supports alternate representations of all text metadata items in the package metadata section
 					to improve global distribution of EPUB Publications. The <a
-						href="https://www.w3.org/TR/epub-33/#alternate-script"><code>alternate-script</code>
-						property</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
-							title="EPUB 3.3">EPUB-33</a></cite>] can be combined with the <code>xml:lang</code>
-					attribute to include and identify alternate script renderings of language-specific metadata.</p>
+						href="../epub-33/index.html#alternate-script"><code>alternate-script</code> property</a>
+							[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
+							>EPUB-33</a></cite>] can be combined with the <code>xml:lang</code> attribute to include and
+					identify alternate script renderings of language-specific metadata.</p>
 
 				<p>Using this property, a Japanese EPUB Publication could, for example, include an alternate
 					Roman-script representation of the author's name and/or one or more representations of the title in
@@ -1570,7 +1561,7 @@
 
 				<p>The <code>page-progression-direction</code> attribute also allows the content flow direction to be
 					globally specified for all Content Documents to facilitate rendering (see the <a
-						href="https://www.w3.org/TR/epub-33/#attrdef-spine-page-progression-direction"
+						href="../epub-33/index.html#attrdef-spine-page-progression-direction"
 						>page-progression-direction</a> [<cite><a class="bibref" data-link-type="biblio"
 							href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>]).</p>
 
@@ -1727,9 +1718,9 @@
 							>Role-Attribute</a></cite>]. This attribute allows any element in an XHTML Content Document
 					to include additional information about its purpose and meaning within the work, using controlled
 					vocabularies and terms. Refer to the section on <a
-						href="https://www.w3.org/TR/epub-33/#app-structural-semantics">Expressing Structural
-						Semantics</a> [<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33"
-							title="EPUB 3.3">EPUB-33</a></cite>] for more information.</p>
+						href="../epub-33/index.html#app-structural-semantics">Expressing Structural Semantics</a>
+							[<cite><a class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
+							>EPUB-33</a></cite>] for more information.</p>
 
 			</section>
 
@@ -1746,12 +1737,12 @@
 					bitmap images or SVG graphics, or even use of CSS explicit positioning and/or table elements to
 					achieve particular visual layouts&#160;—&#160;Authors are strongly discouraged from utilizing such
 					techniques. They are not reliable in EPUB since many Reading Systems render content in a paginated
-					manner rather than creating a single scrolling <a href="https://www.w3.org/TR/epub-33/#dfn-viewport"
+					manner rather than creating a single scrolling <a href="../epub-33/index.html#dfn-viewport"
 						>Viewport</a> and since each Reading System might define its own pagination algorithm. If these
 					techniques are necessary to convey the content of the publication, consider including <a
-						href="https://www.w3.org/TR/epub-33/#sec-foreign-restrictions">fallbacks</a> [<cite><a
-							class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
-						>EPUB-33</a></cite>] (e.g., for graphic novels).</p>
+						href="../epub-33/index.html#sec-foreign-restrictions">fallbacks</a> [<cite><a class="bibref"
+							data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3">EPUB-33</a></cite>] (e.g., for
+					graphic novels).</p>
 
 				<p>In general, it is preferable to achieve visual richness by using CSS Style Sheets without absolute
 					sizing or positioning.</p>
@@ -1781,7 +1772,7 @@
 					renderings can be made available in these cases.</p>
 
 				<p>Publication- and content-level fallbacks are defined in the section on <a
-						href="https://www.w3.org/TR/epub-33/#sec-foreign-restrictions">Foreign Resources</a> [<cite><a
+						href="../epub-33/index.html#sec-foreign-restrictions">Foreign Resources</a> [<cite><a
 							class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
 						>EPUB-33</a></cite>]. These fallback mechanisms enable the inclusion of Foreign Resources in an
 					EPUB Publication and ensure compatibility of EPUB 3 content across Reading Systems with varying
@@ -1796,7 +1787,7 @@
 				<p>EPUB 3 adopts a progressive enhancement approach for scripted content, whereby scripting is not
 					allowed to interfere with the integrity of the document (i.e., not result in information loss when
 					scripting is not available). Consequently, although documents that do employ scripting <a
-						href="https://www.w3.org/TR/epub-33/#sec-scripted-content">can provide fallbacks</a> [<cite><a
+						href="../epub-33/index.html#sec-scripted-content">can provide fallbacks</a> [<cite><a
 							class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
 						>EPUB-33</a></cite>] to further facilitate access to their contents, the documents have to be
 					accessible without them.</p>
@@ -1941,7 +1932,7 @@
 							>W3C</abbr> EPUB&#160;3 Working Group</a>, the interoperability of Reading Systems, as well
 					as of EPUB&#160;3 Publications, is greatly improved. Finally, the documents have become more
 					readable as a result of an extensive editorial revision.</p>
-				<p>The separate <a href="https://www.w3.org/TR/epub-33/#changes-latest">section</a> in&#160;[<cite><a
+				<p>The separate <a href="../epub-33/index.html#changes-latest">section</a> in&#160;[<cite><a
 							class="bibref" data-link-type="biblio" href="#bib-epub-33" title="EPUB 3.3"
 						>EPUB-33</a></cite>] provides a more detailed overview of the changes.</p>
 			</section>
@@ -1967,9 +1958,9 @@
 							href="https://www.w3.org/publishing/epub32/epub-spec.html"
 							>https://www.w3.org/publishing/epub32/epub-spec.html</a></dd>
 					<dt id="bib-epub-33">[EPUB-33]</dt>
-					<dd><a href="https://www.w3.org/TR/epub-33/"><cite>EPUB 3.3</cite></a>. Garth Conboy; Dave Cramer;
-						Marisa DeMeglio; Matt Garrish; Daniel Weck. W3C. URL: <a href="https://www.w3.org/TR/epub-33/"
-							>https://www.w3.org/TR/epub-33/</a></dd>
+					<dd><a href="../epub-33/index.html"><cite>EPUB 3.3</cite></a>. Garth Conboy; Dave Cramer; Marisa
+						DeMeglio; Matt Garrish; Daniel Weck. W3C. URL: <a href="../epub-33/index.html"
+							>../epub-33/index.html</a></dd>
 					<dt id="bib-epub-a11y-10">[EPUB-A11Y-10]</dt>
 					<dd><a href="http://idpf.org/epub/a11y/accessibility-20170105.html"><cite>EPUB Accessibility
 								1.0</cite></a>. Matt Garrish; George Kerscher; Charles LaPierre; Avneesh Singh. IDPF. 05
