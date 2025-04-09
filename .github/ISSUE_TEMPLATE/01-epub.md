@@ -1,4 +1,3 @@
----
 name: EPUB 3
 about: Issue related to the EPUB 3 Recommendation
 title: ''
