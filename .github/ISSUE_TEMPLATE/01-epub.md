@@ -1,64 +1,41 @@
-name: Bug Report
-description: File a bug report.
-title: "[Bug]: "
-labels: ["bug", "triage"]
-projects: ["octo-org/1", "octo-org/44"]
-assignees:
-  - octocat
-body:
+name: EPUB 3
+description: Issue related to the EPUB 3 Recommendation
+title: ''
+labels: Spec-EPUB3
+assignees: ''
+body: 
   - type: markdown
     attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
-  - type: input
-    id: contact
-    attributes:
-      label: Contact Details
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
-    validations:
-      required: false
-  - type: textarea
-    id: what-happened
-    attributes:
-      label: What happened?
-      description: Also tell us, what did you expect to happen?
-      placeholder: Tell us what you see!
-      value: "A bug happened!"
-    validations:
-      required: true
+     value: |
+      Issue on the EPUB 3 Recommendation
   - type: dropdown
     id: version
-    attributes:
+    attributes: 
       label: Version
-      description: What version of our software are you running?
+      description: Which version does this issue occur in? 
       options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
-      default: 0
+        - 3.4
+        - 3.3
+        default: 0
     validations:
       required: true
-  - type: dropdown
-    id: browsers
+  - type: input
+    id: section
     attributes:
-      label: What browsers are you seeing the problem on?
-      multiple: true
-      options:
-        - Firefox
-        - Chrome
-        - Safari
-        - Microsoft Edge
+      label: Section
+      description: Please provide a link to the relevant section
+    validations:
+      required: false 
   - type: textarea
-    id: logs
+    id: problem
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
-  - type: checkboxes
-    id: terms
+      label: Describe the problem
+      description: What is not working? What would you like to see improved? For bug reports, cite the relevant text from the specification.
+    validations:
+      required: true
+  - type: textarea
+    id: fix
     attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com). 
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
+      label: Describe the fix or new feature you propose
+    validations:
+      required: false
