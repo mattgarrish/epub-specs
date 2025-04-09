@@ -27,14 +27,14 @@ body:
     validations:
       required: false 
  - type: textarea
-   id: what-happened
+   id: problem
    attributes:
      label: Describe the problem
      description: What is not working? What would you like to see improved? For bug reports, cite the relevant text from the specification.
    validations:
      required: true
  - type: textarea
-   id: what-happened
+   id: fix
    attributes:
      label: Describe the fix or new feature you propose
    validations:
