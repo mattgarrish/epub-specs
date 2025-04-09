@@ -7,7 +7,7 @@ body:
  - type: markdown
    attributes:
      value: |
-      Issue on the [EPUB 3](https://www.w3.org/TR/epub/) Recommendation
+      Issue on the EPUB 3 Recommendation
  - type: dropdown
    id: version
    attributes: 
