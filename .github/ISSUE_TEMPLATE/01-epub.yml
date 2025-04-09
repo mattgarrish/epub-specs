@@ -1,11 +1,10 @@
 name: EPUB 3
-description: "## Issue on the [EPUB 3.3](https://www.w3.org/TR/epub-33/) Recommendation"
+description: Issue related to the EPUB 3 Recommendation 
 labels: Spec-EPUB3
 body: 
   - type: markdown
     attributes:
-     value: |
-      Issue on the EPUB 3 Recommendation
+     value: "## Issue on the [EPUB 3](https://www.w3.org/TR/epub/) Recommendation"
   - type: dropdown
     id: version
     attributes: 
