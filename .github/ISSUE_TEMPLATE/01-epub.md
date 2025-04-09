@@ -1,5 +1,5 @@
 name: EPUB 3
-about: Issue related to the EPUB 3 Recommendation
+description: Issue related to the EPUB 3 Recommendation
 title: ''
 labels: Spec-EPUB3
 assignees: ''
@@ -11,7 +11,8 @@ body:
  - type: dropdown
    id: version
    attributes: 
-     description: Version
+     label: Version
+     description: Which version does this issue occur in? 
      options:
       - 3.4
       - 3.3
