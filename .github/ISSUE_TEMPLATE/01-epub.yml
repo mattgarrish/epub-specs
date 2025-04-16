@@ -4,23 +4,15 @@ labels: Spec-EPUB3
 body: 
   - type: markdown
     attributes:
-     value: "## Issue on the [EPUB 3](https://www.w3.org/TR/epub/) Recommendation"
-  - type: dropdown
-    id: version
-    attributes: 
-      label: Version
-      description: Which version does this issue occur in? 
-      options:
-        - 3.4
-        - 3.3
-      default: 0
-    validations:
-      required: true
+     value: "## Issue on the [EPUB 3](https://www.w3.org/TR/epub/) Recommendation |
+      |
+      Before opening an issue, please check that it has not already been resolved in the latest |
+      [editor's draft](https://w3c.github.io/epub-specs/epub34/authoring/)
   - type: input
     id: section
     attributes:
       label: Section
-      description: Please provide a link to the relevant section
+      description: Please provide a link to the relevant section of the specification
     validations:
       required: false 
   - type: textarea
