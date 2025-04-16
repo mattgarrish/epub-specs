@@ -1,13 +1,13 @@
-name: EPUB 3
-description: Issue related to the EPUB 3 Recommendation 
-labels: Spec-EPUB3
+name: EPUB Accessibility Techniques
+description: Issue related to the EPUB Accessibility Techniques Working Group Note
+labels: Spec-A11yTechniques
 body: 
   - type: markdown
     attributes:
-     value: "## Issue on the [EPUB 3](https://www.w3.org/TR/epub/) Recommendation"
+     value: "## Issue on the [EPUB Accessibility Techniques](https://www.w3.org/TR/epub-a11y-tech/) WG Note"
   - type: markdown
     attributes:
-     value: __Before opening an issue__, please check that it has not already been resolved in the latest [editor's draft](https://w3c.github.io/epub-specs/epub34/authoring/)
+     value: __Before opening an issue__, please check that it has not already been resolved in the latest [editor's draft](https://w3c.github.io/epub-specs/epub34/a11y-tech/)
   - type: input
     id: section
     attributes:
