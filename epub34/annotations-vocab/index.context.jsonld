@@ -1,0 +1,169 @@
+{
+    "@context": ["https://www.w3.org/ns/anno.jsonld", {
+        "@protected": true,
+        "id": "@id",
+        "type": "@type",
+        "language": "@language",
+        "direction": "@direction",
+        "text": "@value",
+        "@vocab": "http://www.w3.org/ns/ea#",
+        "About": "http://www.w3.org/ns/ea#About",
+        "Annotation": {
+            "@id": "http://www.w3.org/ns/ea#Annotation",
+            "@context": {
+                "@protected": true,
+                "body": {
+                    "@id": "http://www.w3.org/ns/ea#body",
+                    "@type": "@id"
+                },
+                "motivation": {
+                    "@id": "http://www.w3.org/ns/ea#motivation",
+                    "@type": "@vocab",
+                    "@context": {
+                        "bookmarking": "http://www.w3.org/ns/oa#bookmarking",
+                        "commenting": "http://www.w3.org/ns/oa#commenting",
+                        "highlighting": "http://www.w3.org/ns/oa#highlighting",
+                        "@vocab": "ea:INVALID_VALUE:"
+                    }
+                },
+                "target": {
+                    "@id": "http://www.w3.org/ns/ea#target",
+                    "@type": "@id"
+                }
+            }
+        },
+        "AnnotationSet": {
+            "@id": "http://www.w3.org/ns/ea#AnnotationSet",
+            "@context": {
+                "@protected": true,
+                "about": {
+                    "@id": "http://www.w3.org/ns/ea#about",
+                    "@type": "@id"
+                },
+                "generator": {
+                    "@id": "http://www.w3.org/ns/ea#generator",
+                    "@type": "@id"
+                },
+                "items": {
+                    "@id": "http://www.w3.org/ns/ea#items",
+                    "@type": "@id",
+                    "@container": "@set"
+                }
+            }
+        },
+        "Audio": "http://www.w3.org/ns/ea#Audio",
+        "Body": {
+            "@id": "http://www.w3.org/ns/ea#Body",
+            "@context": {
+                "@protected": true,
+                "color": {
+                    "@id": "http://www.w3.org/ns/ea#color",
+                    "@type": "@vocab",
+                    "@context": {
+                        "pink": "http://www.w3.org/ns/ea#pink",
+                        "orange": "http://www.w3.org/ns/ea#orange",
+                        "yellow": "http://www.w3.org/ns/ea#yellow",
+                        "green": "http://www.w3.org/ns/ea#green",
+                        "blue": "http://www.w3.org/ns/ea#blue",
+                        "purple": "http://www.w3.org/ns/ea#purple",
+                        "@vocab": "ea:INVALID_VALUE:"
+                    }
+                },
+                "highlight": {
+                    "@id": "http://www.w3.org/ns/ea#highlight",
+                    "@type": "@vocab",
+                    "@context": {
+                        "solid": "http://www.w3.org/ns/ea#solid",
+                        "underline": "http://www.w3.org/ns/ea#underline",
+                        "strikethrough": "http://www.w3.org/ns/ea#strikethrough",
+                        "outline": "http://www.w3.org/ns/ea#outline",
+                        "@vocab": "ea:INVALID_VALUE:"
+                    }
+                },
+                "tags": {
+                    "@id": "http://www.w3.org/ns/ea#tags",
+                    "@type": "http://www.w3.org/2001/XMLSchema#string",
+                    "@container": "@set"
+                }
+            }
+        },
+        "Creator": {
+            "@id": "http://www.w3.org/ns/ea#Creator",
+            "@context": {
+                "@protected": true,
+                "name": "http://www.w3.org/ns/ea#name"
+            }
+        },
+        "FragmentSelector": {
+            "@id": "http://www.w3.org/ns/ea#FragmentSelector",
+            "@context": {
+                "@protected": true,
+                "conformsTo": {
+                    "@id": "http://www.w3.org/ns/ea#conformsTo",
+                    "@type": "@vocab",
+                    "@context": {
+                        "https://tools.ietf.org/rfc/rfc3236.html": "https://tools.ietf.org/rfc/rfc3236.html",
+                        "http://www.w3.org/TR/media-frags/": "http://www.w3.org/TR/media-frags/",
+                        "https://www.w3.org/TR/SVG/": "https://www.w3.org/TR/SVG/",
+                        "https://wicg.github.io/scroll-to-text-fragment/": "https://wicg.github.io/scroll-to-text-fragment/",
+                        "@vocab": "ea:INVALID_VALUE:"
+                    }
+                }
+            }
+        },
+        "Generator": {
+            "@id": "http://www.w3.org/ns/ea#Generator",
+            "@context": {
+                "@protected": true,
+                "homepage": {
+                    "@id": "http://www.w3.org/ns/ea#homepage",
+                    "@type": "@id"
+                },
+                "name": "http://www.w3.org/ns/ea#name"
+            }
+        },
+        "Meta": "http://www.w3.org/ns/ea#Meta",
+        "Selector": {
+            "@id": "http://www.w3.org/ns/ea#Selector",
+            "@context": {
+                "@protected": true,
+                "refinedBy": {
+                    "@id": "http://www.w3.org/ns/ea#refinedBy",
+                    "@type": "@id"
+                }
+            }
+        },
+        "Target": {
+            "@id": "http://www.w3.org/ns/ea#Target",
+            "@context": {
+                "@protected": true,
+                "meta": {
+                    "@id": "http://www.w3.org/ns/ea#meta",
+                    "@type": "@id"
+                },
+                "selector": {
+                    "@id": "http://www.w3.org/ns/ea#selector",
+                    "@type": "@id"
+                },
+                "source": {
+                    "@id": "http://www.w3.org/ns/ea#source",
+                    "@type": "@id"
+                }
+            }
+        },
+        "creator": {
+            "@id": "http://www.w3.org/ns/ea#creator",
+            "@type": "@id"
+        },
+        "pink": "http://www.w3.org/ns/ea#pink",
+        "orange": "http://www.w3.org/ns/ea#orange",
+        "yellow": "http://www.w3.org/ns/ea#yellow",
+        "green": "http://www.w3.org/ns/ea#green",
+        "blue": "http://www.w3.org/ns/ea#blue",
+        "purple": "http://www.w3.org/ns/ea#purple",
+        "solid": "http://www.w3.org/ns/ea#solid",
+        "underline": "http://www.w3.org/ns/ea#underline",
+        "strikethrough": "http://www.w3.org/ns/ea#strikethrough",
+        "outline": "http://www.w3.org/ns/ea#outline"
+    }]
+}

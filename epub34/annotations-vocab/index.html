@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="color-scheme" content="light dark">
+    <title>EPUB Annotations Vocabulary 1.0</title>
+    <script class="remove" src="https://www.w3.org/Tools/respec/respec-w3c"></script>
+    <script src="../../common/js/fix-errata.js" class="remove"></script>
+    <script src="../../common/js/css-inline.js" class="remove"></script>
+    <script class="remove">
+        var respecConfig = {
+            group: "pm",
+            wgPublicList: "public-pm-wg",
+            copyrightStart: "2026",
+            includePermalinks: true,
+            permalinkEdge: true,
+            permalinkHide: false,
+            specStatus: "ED",
+            shortName: "epub-anno-vocab-10",
+            edDraftURI: "https://w3c.github.io/epub-specs/epub34/annotations-vocab/",
+            doJsonLd: true,
+            editors: [{
+                    name: "Ivan Herman",
+                    url: "https://www.w3.org/People/Ivan/",
+                    company: "W3C",
+                    w3cid: 7382,
+                    orcid: "0000-0003-0782-2704",
+                    companyURL: "https://www.w3.org",
+                },
+                {
+                    name: "Laurent Le Meur",
+                    company: "EDRLab",
+                    companyURL: "https://www.edrlab.org",
+                    w3cid: 91888,
+                },
+            ],
+            inlineCSS: true,
+            doRDFa: false,
+            noIDLIn: true,
+            noRecTrack: true,
+            noLegacyStyle: false,
+            github: {
+                repoURL: "https://github.com/w3c/epub-specs",
+                branch: "main",
+            },
+            xref: {
+                profile: "web-platform",
+                specs: ["epub-34"],
+            },
+            postProcess: [fixErrataField],
+        };
+
+    </script>
+    <style type="text/css">
+        dl.terms dt {
+            float: left;
+            clear: left;
+            width: 10vw;
+        }
+
+        dl.terms dd {
+            margin-left: 15vw;
+        }
+
+        dl.terms dd:after {
+            content: "";
+            display: block;
+            clear: both;
+            margin-bottom: 5px;
+        }
+
+        table.rdfs-definition td {
+            vertical-align: top;
+            margin-right: 2em;
+        }
+
+        .bold {
+            font-weight: bold;
+        }
+
+        /* code {
+        color: red;
+      } */
+
+        .term_definitions section {
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+            border-bottom-color: darkgrey;
+        }
+
+        .annoy {
+            background: hsla(40, 100%, 50%, 0.95);
+            color: black;
+            padding: 0.75em 1em;
+            border: red;
+            border-style: solid none;
+            box-shadow: 0 2px 8px black;
+            text-align: center;
+        }
+
+        details.desc {
+            margin-top: -2.5rem !important;
+            margin-left: 3rem !important;
+        }
+
+        details.explanation,
+        details.desc {
+            background-color: rgb(245, 245, 245);
+            border-left: 0.3em solid rgb(200, 200, 200);
+            padding: 0.3em;
+        }
+
+        details.explanation>summary,
+        details.desc>summary {
+            font-size: small;
+            text-align: left;
+            font-weight: normal !important;
+            font-style: italic;
+        }
+
+        figure svg {
+            max-width: 100%;
+            margin: auto;
+            height: auto;
+        }
+
+    </style>
+    <link href="index.jsonld" rel="alternate" type="application/ld+json">
+    <link href="index.ttl" rel="alternate" type="text/turtle">
+</head>
+
+<body>
+    <section id="abstract">
+        <p>
+            This document defines the RDFS&nbsp;[[rdf-schema]] vocabulary for the [[[epub-anno-10]]]
+            specification. RDF versions of the vocabulary, in
+            <a rel="alternate" id="alt-turtle" href="index.ttl">Turtle</a>&nbsp;[[turtle]] and
+            <a rel="alternate" id="alt-jsonld" href="index.jsonld">JSON-LD</a>&nbsp;[[json-ld11]], as
+            well as a <a href="./index.context.jsonld">JSON-LD <code>@context</code></a>, are also available.
+        </p>
+    </section>
+    <section id="sotd">
+        <p>
+            This document defines the
+            <span property="dc:title" id="ontology_title">EPUB Annotations Vocabulary 1.0</span>, an
+            <span property="dc:description" id="description">RDFS [[rdf-schema]] vocabulary formalizing the terms defined in the [[[epub-anno-10]]] specification. The vocabulary is
+                a "profile" of the W3C [[[annotation-vocab]]]</span>.
+            <!-- This vocabulary has been defined by the <a href="https://www.w3.org/groups/wg/pm/">W3C Publishing Maintenance Working Group</a> and provides
+        the [[[rdf-schema]]] [[rdf-schema]] vocabulary for [[[epub-ann]]] [[epub-ann]].
+        Comments regarding this vocabulary are welcome. Please file issues
+        directly on <a href="https://github.com/w3c/epub-specs/">GitHub</a>. -->
+        </p>
+    </section>
+
+    <section>
+        <h2>Introduction</h2>
+
+        <p>
+            This document defines the EPUB Annotations Vocabulary 1.0,
+            an RDFS&nbsp;[[rdf-schema]] vocabulary formalizing the terms defined in the [[[epub-anno-10]]] specification.
+            The vocabulary is a "profile" of the W3C [[[annotation-vocab]]].
+        </p>
+        <p>
+            Publishing this vocabulary as a Working Group Note ensures the
+            stability of the vocabulary and of the related JSON-LD <code>@context</code> file.
+            This stability is important for implementers of&nbsp;[[epub-anno-10]] who
+            want to rely on the Linked Data aspects of the underlying Data Model.
+        </p>
+    </section>
+    <section>
+        <h2>Namespaces</h2>
+        <p>This specification makes use of the following namespaces:</p>
+        <dl class="terms" id="namespaces">
+            <dt><code>ea</code></dt>
+            <dd><code>http://www.w3.org/ns/ea#</code></dd>
+            <dt><code>oa</code></dt>
+            <dd><code>http://www.w3.org/ns/oa#</code></dd>
+            <dt><code>as</code></dt>
+            <dd><code>http://www.w3.org/ns/activitystreams#</code></dd>
+            <dt><code>foaf</code></dt>
+            <dd><code>http://xmlns.com/foaf/0.1/</code></dd>
+            <dt><code>dctypes</code></dt>
+            <dd><code>http://purl.org/dc/dcmitype/</code></dd>
+            <dt><code>dc</code></dt>
+            <dd><code>http://purl.org/dc/terms/</code></dd>
+            <dt><code>dcterms</code></dt>
+            <dd><code>http://purl.org/dc/terms/</code></dd>
+            <dt><code>owl</code></dt>
+            <dd><code>http://www.w3.org/2002/07/owl#</code></dd>
+            <dt><code>rdf</code></dt>
+            <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
+            <dt><code>rdfs</code></dt>
+            <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
+            <dt><code>xsd</code></dt>
+            <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
+        </dl>
+    </section>
+
+    <section id="term_definitions">
+        <h1>Term definitions</h1>
+
+        <section id="class_definitions" class="term_definitions">
+            <h2>Class definitions</h2>
+            <p>The following are class definitions in the <code>ea</code> namespace.</p>
+            <section id="About">
+                <h4><code>About</code></h4>
+                <p><em>Information about the EPUB publication</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-about-object">formal definition of the term</a>.</p>
+                <div>Dublin Core terms are used with this class, retaining the prefixes (to be in line with the EPUB Package Document).</div>
+                <dl class="terms">
+                    <dt>Range of:</dt>
+                    <dd><a href="#about"><code>about</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="Annotation">
+                <h4><code>Annotation</code></h4>
+                <p><em>EPUB Annotation Object</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-annotation-object">formal definition of the term</a>.</p>
+                <div>A subclass of the <a href="https://www.w3.org/TR/annotation-vocab/#annotation">Web Annotation object</a> with some restrictions with regards of various
+                    properties.</div>
+                <dl class="terms">
+                    <dt>Subclass of:</dt>
+                    <dd><a href="http://www.w3.org/ns/oa#Annotation"><code>oa:Annotation</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Range of:</dt>
+                    <dd><a href="#items"><code>items</code></a></dd>
+                    <dt>Domain of:</dt>
+                    <dd><a href="#body"><code>body</code></a>, <a href="#motivation"><code>motivation</code></a>, <a href="#target"><code>target</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="AnnotationSet">
+                <h4><code>AnnotationSet</code></h4>
+                <p><em>Set of annotations</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-annotationset">formal definition of the term</a>.</p>
+                <div>An unordered collection of annotations, used as an interchange format amont EPUB Reading Systems.</div>
+                <dl class="terms">
+                    <dt>Domain of:</dt>
+                    <dd><a href="#about"><code>about</code></a>, <a href="#generator"><code>generator</code></a>, <a href="#items"><code>items</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="Audio">
+                <h4><code>Audio</code></h4>
+                <p><em>Class for audio resources</em></p>
+                <div>This class is an "alias" of the <a href="https://www.w3.org/TR/annotation-vocab/#dctypes-sound"><code>Sound</code></a> class, using a terminology more widely
+                    used in practice.</div>
+                <dl class="terms">
+                    <dt>Subclass of:</dt>
+                    <dd><a href="http://purl.org/dc/dcmitype/Sound"><code>dctypes:Sound</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="Body">
+                <h4><code>Body</code></h4>
+                <p><em>Body of an EPUB Annotation</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-body-object">formal definition of the term</a>.</p>
+                <div>In EPUB, annotations are restricted textual content, image, audio, or video.</div>
+                <dl class="terms">
+                    <dt>Subclass of:</dt>
+                    <dd><a href="http://www.w3.org/ns/oa#TextualBody"><code>oa:TextualBody</code></a> ⊔&nbsp;<a href="http://www.w3.org/ns/oa#Image"><code>oa:Image</code></a>
+                        ⊔&nbsp;<a href="#Audio"><code>Audio</code></a> ⊔&nbsp;<a href="http://www.w3.org/ns/oa#Video"><code>oa:Video</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Range of:</dt>
+                    <dd><a href="#body"><code>body</code></a></dd>
+                    <dt>Domain of:</dt>
+                    <dd><a href="#color"><code>color</code></a>, <a href="#highlight"><code>highlight</code></a>, <a href="#tags"><code>tags</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="Creator">
+                <h4><code>Creator</code></h4>
+                <p><em>Creator of an EPUB Annotation</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-creator-object">formal definition of the term</a>.</p>
+                <div>JSON-LD serializations should use the terms <code>Person</code>, <code>Organization</code>, or <code>Software</code> for typing, as these are the only
+                    available creator types.</div>
+                <dl class="terms">
+                    <dt>Subclass of:</dt>
+                    <dd><a href="http://xmlns.com/foaf/0.1/Person"><code>foaf:Person</code></a> ⊔&nbsp;<a
+                            href="http://xmlns.com/foaf/0.1/Organization"><code>foaf:Organization</code></a> ⊔&nbsp;<a
+                            href="http://www.w3.org/ns/activitystreams#Application"><code>as:Application</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Range of:</dt>
+                    <dd><a href="#creator"><code>creator</code></a></dd>
+                    <dt>In the domain of:</dt>
+                    <dd><a href="#name"><code>name</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="FragmentSelector">
+                <h4><code>FragmentSelector</code></h4>
+                <p><em>Fragment Selector in EPUB</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-fragment-selector-object">formal definition of the term</a>.</p>
+                <div>This is restricted version of the <a href="https://www.w3.org/TR/annotation-vocab/#fragmentselector">Web Annotation Fragment Selector</a>, reducing the list of
+                    valid media types.</div>
+                <dl class="terms">
+                    <dt>Subclass of:</dt>
+                    <dd><a href="http://www.w3.org/ns/oa#FragmentSelector"><code>oa:FragmentSelector</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain of:</dt>
+                    <dd><a href="#conformsTo"><code>conformsTo</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="Generator">
+                <h4><code>Generator</code></h4>
+                <p><em>Generator</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-generator-object">formal definition of the term</a>.</p>
+                <div>Information about the tool generating the annotations.</div>
+                <dl class="terms">
+                    <dt>Range of:</dt>
+                    <dd><a href="#generator"><code>generator</code></a></dd>
+                    <dt>Domain of:</dt>
+                    <dd><a href="#homepage"><code>homepage</code></a></dd>
+                    <dt>In the domain of:</dt>
+                    <dd><a href="#name"><code>name</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="Meta">
+                <h4><code>Meta</code></h4>
+                <p><em>Meta</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-target-object">formal definition of the term</a>.</p>
+                <div>this class is currently undefined...</div>
+                <dl class="terms">
+                    <dt>Range of:</dt>
+                    <dd><a href="#meta"><code>meta</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="Selector">
+                <h4><code>Selector</code></h4>
+                <p><em>EPUB Annotation selector</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-selector">formal definition of the term</a>.</p>
+                <div>A restrictive subset of selectors, usable in EPUB.</div>
+                <dl class="terms">
+                    <dt>Subclass of:</dt>
+                    <dd><a href="#FragmentSelector"><code>FragmentSelector</code></a> ⊔&nbsp;<a href="http://www.w3.org/ns/oa#CssSelector"><code>oa:CssSelector</code></a> ⊔&nbsp;<a
+                            href="http://www.w3.org/ns/oa#TextPositionSelector"><code>oa:TextPositionSelector</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Range of:</dt>
+                    <dd><a href="#refinedBy"><code>refinedBy</code></a>, <a href="#selector"><code>selector</code></a></dd>
+                    <dt>Domain of:</dt>
+                    <dd><a href="#refinedBy"><code>refinedBy</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="Target">
+                <h4><code>Target</code></h4>
+                <p><em>Target of an EPUB Annotation.</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-target-object">formal definition of the term</a>.</p>
+                <dl class="terms">
+                    <dt>Range of:</dt>
+                    <dd><a href="#target"><code>target</code></a></dd>
+                    <dt>Domain of:</dt>
+                    <dd><a href="#meta"><code>meta</code></a>, <a href="#selector"><code>selector</code></a>, <a href="#source"><code>source</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+        </section>
+
+        <section id="property_definitions" class="term_definitions">
+            <h2>Property definitions</h2>
+            <p>The following are property definitions in the <code>ea</code> namespace.</p>
+            <section id="about">
+                <h4><code>about</code></h4>
+                <p><em>Information on the EPUB publication</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-about">formal definition of the term</a>.</p>
+                <div>Provide information on the EPUB publication associated with an Annotation Set.</div>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#AnnotationSet"><code>AnnotationSet</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><a href="#About"><code>About</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="body">
+                <h4><code>body</code></h4>
+                <p><em>Designates the body of an annotation</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-body">formal definition of the term</a>.</p>
+                <div>The range of body types is restricted for EPUB.</div>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://www.w3.org/ns/oa#hasBody"><code>oa:hasBody</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Annotation"><code>Annotation</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><a href="#Body"><code>Body</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="color">
+                <h4><code>color</code></h4>
+                <p><em>Highlight color</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-color">formal definition of the term</a>.</p>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Body"><code>Body</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="conformsTo">
+                <h4><code>conformsTo</code></h4>
+                <p><em>Designates the fragment format</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-conformsto">formal definition of the term</a>.</p>
+                <div>The range of possible media formats in Fragment Selectors is restricted, see the range of this property.</div>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://purl.org/dc/terms/conformsTo"><code>dcterms:conformsTo</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#FragmentSelector"><code>FragmentSelector</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><code>dcterms:Standard</code></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Value may be one of:</dt>
+                    <dd><a href="https://tools.ietf.org/rfc/rfc3236.html"><code>https://tools.ietf.org/rfc/rfc3236.html</code></a>, <a
+                            href="http://www.w3.org/TR/media-frags/"><code>http://www.w3.org/TR/media-frags/</code></a>, <a
+                            href="https://www.w3.org/TR/SVG/"><code>https://www.w3.org/TR/SVG/</code></a>, <a
+                            href="https://wicg.github.io/scroll-to-text-fragment/"><code>https://wicg.github.io/scroll-to-text-fragment/</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="creator">
+                <h4><code>creator</code></h4>
+                <p><em>Information on the creator of an annotation</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-creator">formal definition of the term</a>.</p>
+                <div>The range of Creator types is restricted in EPUB.</div>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://purl.org/dc/terms/creator"><code>dcterms:creator</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Range:</dt>
+                    <dd><a href="#Creator"><code>Creator</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="generator">
+                <h4><code>generator</code></h4>
+                <p><em>Information on the tool generating the annotations</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-generator">formal definition of the term</a>.</p>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://www.w3.org/ns/activitystreams#generator"><code>as:generator</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#AnnotationSet"><code>AnnotationSet</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><a href="#Generator"><code>Generator</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="highlight">
+                <h4><code>highlight</code></h4>
+                <p><em>Highlight mode</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-highlight">formal definition of the term</a>.</p>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Body"><code>Body</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="homepage">
+                <h4><code>homepage</code></h4>
+                <p><em>Homepage of the tool generating the annotations</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-homepage">formal definition of the term</a>.</p>
+                <p>The property's value should be a URL, i.e., not a literal.</p>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://xmlns.com/foaf/0.1/homepage"><code>foaf:homepage</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Generator"><code>Generator</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="items">
+                <h4><code>items</code></h4>
+                <p><em>Items in a set of annotations</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-items">formal definition of the term</a>.</p>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#AnnotationSet"><code>AnnotationSet</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><a href="#Annotation"><code>Annotation</code></a>
+                        <p>In a JSON-LD representation, values to this property are supposed to be represented in the form of a JSON array, even if there is just a single value.
+                        </p>
+                    </dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="meta">
+                <h4><code>meta</code></h4>
+                <p><em>Meta</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-meta">formal definition of the term</a>.</p>
+                <div>To be defined…</div>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Target"><code>Target</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><a href="#Meta"><code>Meta</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="motivation">
+                <h4><code>motivation</code></h4>
+                <p><em>Provides the motivation for an annotation</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-motivation">formal definition of the term</a>.</p>
+                <div>The set of motivation types is restricted in EPUB, see the range definition. In the JSON-LD serialization those terms should be used without prefix.</div>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://www.w3.org/ns/oa#motivatedBy"><code>oa:motivatedBy</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Annotation"><code>Annotation</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><a href="http://www.w3.org/ns/oa#Motivation"><code>oa:Motivation</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Value may be one of:</dt>
+                    <dd><a href="http://www.w3.org/ns/oa#bookmarking"><code>oa:bookmarking</code></a>, <a href="http://www.w3.org/ns/oa#commenting"><code>oa:commenting</code></a>,
+                        <a href="http://www.w3.org/ns/oa#highlighting"><code>oa:highlighting</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="name">
+                <h4><code>name</code></h4>
+                <p><em>Name</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-name">formal definition of the term</a>.</p>
+                <div>This property is available on some classes, see domain definition.<br><br>The property's value is expected to be a natural language string.</div>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://xmlns.com/foaf/0.1/name"><code>foaf:name</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Creator"><code>Creator</code></a> ⊔&nbsp;<a href="#Generator"><code>Generator</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><code>rdf:langString</code> ⊔&nbsp;<code>xsd:string</code> ⊔&nbsp;<code>rdf:dirLangString</code></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="refinedBy">
+                <h4><code>refinedBy</code></h4>
+                <p><em>Selector refinement</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-motivation">formal definition of the term</a>.</p>
+                <div>This property restricts the usage of the general <a href="https://www.w3.org/TR/annotation-vocab/#refinedby"><code>oa:refinedBy</code></a> property to the list
+                    of Selector types available in EPUB.</div>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://www.w3.org/ns/oa#refinedBy"><code>oa:refinedBy</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Selector"><code>Selector</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><a href="#Selector"><code>Selector</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="selector">
+                <h4><code>selector</code></h4>
+                <p><em>Designates the selector(s) for a target</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-selector">formal definition of the term</a>.</p>
+                <div>This property restricts the possible Selector types in EPUB.</div>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://www.w3.org/ns/oa#hasSelector"><code>oa:hasSelector</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Target"><code>Target</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><a href="#Selector"><code>Selector</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="source">
+                <h4><code>source</code></h4>
+                <p><em>Designates the source resource for the target</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-source">formal definition of the term</a>.</p>
+                <p>The property's value should be a URL, i.e., not a literal.</p>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://www.w3.org/ns/oa#hasSource"><code>oa:hasSource</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Target"><code>Target</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="tags">
+                <h4><code>tags</code></h4>
+                <p><em>Tags</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-tags">formal definition of the term</a>.</p>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Body"><code>Body</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><code>xsd:string</code>
+                        <p>In a JSON-LD representation, values to this property are supposed to be represented in the form of a JSON array, even if there is just a single value.
+                        </p>
+                    </dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="target">
+                <h4><code>target</code></h4>
+                <p><em>Designates the target resource for the EPUB annotation</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-target">formal definition of the term</a>.</p>
+                <dl class="terms">
+                    <dt>Subproperty of:</dt>
+                    <dd><span><a href="http://www.w3.org/ns/oa#hasTarget"><code>oa:hasTarget</code></a></span><br></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Domain:</dt>
+                    <dd><a href="#Annotation"><code>Annotation</code></a></dd>
+                    <dt>Range:</dt>
+                    <dd><a href="#Target"><code>Target</code></a></dd>
+                </dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+        </section>
+
+
+        <section id="individual_definitions" class="term_definitions">
+            <h2>Definitions for individuals</h2>
+            <p>The following are definitions for individuals in the <code>ea</code> namespace.</p>
+            <section id="pink">
+                <h4><code>pink</code></h4>
+                <p><em>Pink selection color</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-color">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="orange">
+                <h4><code>orange</code></h4>
+                <p><em>Orange selection color</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-color">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="yellow">
+                <h4><code>yellow</code></h4>
+                <p><em>Yellow selection color</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-color">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="green">
+                <h4><code>green</code></h4>
+                <p><em>Green selection color</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-color">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="blue">
+                <h4><code>blue</code></h4>
+                <p><em>Blue selection color</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-color">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="purple">
+                <h4><code>purple</code></h4>
+                <p><em>Purple selection color</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-color">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="solid">
+                <h4><code>solid</code></h4>
+                <p><em>Solid selection highlight</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-highlight">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="underline">
+                <h4><code>underline</code></h4>
+                <p><em>Underline selection highlight</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-highlight">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="strikethrough">
+                <h4><code>strikethrough</code></h4>
+                <p><em>Strikethrough selection highlight</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-highlight">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+            <section id="outline">
+                <h4><code>outline</code></h4>
+                <p><em>Outline selection highlight</em></p>
+                <p>See the <a href="https://www.w3.org/TR/epub-anno-10/#dfn-highlight">formal definition of the term</a>.</p>
+                <dl class="terms"></dl>
+                <dl class="terms">
+                    <dt>Relevant <code>@context</code>:</dt>
+                    <dd><a href="https://www.w3.org/ns/epub-anno.jsonld"><code>https://www.w3.org/ns/epub-anno.jsonld</code></a></dd>
+                </dl>
+            </section>
+        </section>
+    </section>
+
+
+</body>
+
+</html>

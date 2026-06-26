@@ -1,50 +1,1525 @@
 <!DOCTYPE html>
 <html lang="en-US">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="color-scheme" content="light dark" />
-		<title>EPUB Annotations 3.4</title>
-		<script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
-		<script src="../../common/js/css-inline.js" class="remove"></script>
-		<script class="remove">
-			var respecConfig = {
-				group: "pm",
-				wgPublicList: "public-pm-wg",
-				specStatus: "ED",
-				shortName: "epub-ann",
-				noRecTrack: false,
-				edDraftURI: "https://w3c.github.io/epub-specs/epub34/annotations/",
-                copyrightStart: "2025",
-				editors: [
-					{
-						name: "Laurent Le Meur",
-						company: "EDRLab",
-						companyURL: "https://www.edrlab.org",
-						"w3cid": 91888
-					}
-				],
-				includePermalinks: true,
-				permalinkEdge: true,
-				permalinkHide: false,
-				github: {
-					repoURL: "https://github.com/w3c/epub-specs",
-					branch: "main"
-				},
-				preProcess:[inlineCustomCSS],
-				xref: {
-					profile: "web-platform",
-					specs: ["epub-34"]
-				},
 
-			};
-		</script>
-	</head>
-	<body>
-		<section id="abstract">
-			<p>Lorem ipsum…</p>
-		</section>
-		<section id="sotd"></section>
-		<section id="sec-intro">
-		</section>
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="color-scheme" content="light dark" />
+        <title>EPUB Annotations 1.0</title>
+        <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove">
+        </script>
+        <script src="../../common/js/css-inline.js" class="remove"></script>
+        <script src="../../common/js/add-caution-hd.js" class="remove"></script>
+        <script class="remove">
+            var respecConfig = {
+                subtitle: "An interchange format for user notes, highlights, and bookmarks",
+                group: "pm",
+                wgPublicList: "public-pm-wg",
+                specStatus: "ED",
+                // publishDate: "2026-02-24",
+                shortName: "epub-anno-10",
+                noRecTrack: false,
+                edDraftURI: "https://w3c.github.io/epub-specs/epub34/annotations/",
+                copyrightStart: "2026",
+                editors: [{
+                    name: "Laurent Le Meur",
+                    company: "EDRLab",
+                    companyURI: "https://www.edrlab.org",
+                    "w3cid": 91888
+                }, {
+                    name: "Ivan Herman",
+                    url: "https://www.w3.org/People/Ivan/",
+                    company: "W3C",
+                    w3cid: 7382,
+                    orcid: "0000-0003-0782-2704",
+                    companyURI: "https://www.w3.org",
+                }],
+                includePermalinks: true,
+                permalinkEdge: true,
+                permalinkHide: false,
+                github: {
+                    repoURL: "https://github.com/w3c/epub-specs",
+                    branch: "main"
+                },
+                preProcess: [inlineCustomCSS],
+                postProcess: [addCautionHeaders],
+                testSuiteURL: "https://w3c.github.io/epub-tests/index.html",
+                xref: {
+                    profile: "web-platform",
+                    specs: ["epub-34"]
+                },
+                lint: { "no-unused-dfns": false },
+                localBiblio: {
+                    "scroll-to-text-fragment": {
+                        "authors": [
+                            "Nick Burris",
+                            "David Bokan"
+                        ],
+                        "title": "URL Fragment Text Directives",
+                        "publisher": "W3C",
+                        "href": "https://wicg.github.io/scroll-to-text-fragment/"
+                    },
+                    "ISO21320": {
+                        "date": "2015",
+                        "href": "https://www.iso.org/standard/60101.html",
+                        "publisher": "ISO",
+                        "status": "International Standard",
+                        "title": "Document Container File - ISO/IEC 21320",
+                        "isoNumber": "ISO/IEC 21320-1:2015"
+                    }
+                }
+
+            };</script>
+    </head>
+
+    <body>
+        <section id="abstract">
+            <p> This document defines a profile of the [[[annotation-model]]] [[annotation-model]]
+                by specifying a subset of the terms, and adding terms deemed useful to satisfy
+                the entries in the [[[epub-anno-ucr]]] [[epub-anno-ucr]] document.
+            </p>
+        </section>
+        <section id="sotd"></section>
+        <section id="conformance">
+            <!-- <p>All algorithm explanations are <em>non-normative</em>.</p> -->
+        </section>
+
+        <section class="informative">
+            <h1>Introduction</h1>
+
+            <p> This section defines a profile of the [[[annotation-model]]] [[annotation-model]], as used for EPUB
+                Annotations.</p>
+
+            <p> In the Web Annotation model, the core structure is the
+                <a data-cite="annotation-model#annotations">Annotation object</a>,
+                which contains properties defining the annotation's
+                <a data-cite="annotation-model#bodies-and-targets">Body and Target</a>.
+                EPUB Annotations reuse the <a href="#annotation">same model</a> with some restrictions specified in this document.
+                Subsequent sections provide more formal definitions for the terms used by this specification.
+            </p>
+            <ul>
+                <li> Web Annotations may have 0 or more Bodies, whereas this document requires to have a single <a href="#body">Body</a>
+                    per annotation. Although most use cases relate to textual notes embedded in the annotation, this version
+                    of the specification paves the way to the inclusion of audiovisual notes by also allowing external Web resources.
+                </li>
+
+                <li> Web Annotations have 1 or more Targets, while only a single <a href="#target">Target</a> is
+                    allowed for an EPUB Annotation.
+                    The Target of an EPUB Annotation is the content being annotated, which is
+                    a specific segment in a document within the EPUB package defined by its relative
+                    <a href="#source">Source</a> URL and a <a href="#selector">Selector</a>.
+                </li>
+
+                <li> Web Annotations may have multiple motivations, while only a single motivation is allowed for EPUB
+                    annotations. </li>
+
+                <li> Web Annotations may have multiple creators, while only a single creator is allowed for EPUB
+                    annotations.</li>
+
+                <li> Web Annotations may have additional properties that are not defined for EPUB Annotations (see the
+                    definitions of the properties in later sections). For example,
+                    a specific generator application and generated date may exist for a Web Annotation,
+                    whereas this document only defines these properties for <a href="#annotation-set">Annotation Sets</a>.
+                    Web Annotations also define additional property values and types than are not accepted for EPUB Annotations. </li>
+
+                <li> Web Annotations define an <a data-cite="annotation-model#annotation-collection">Annotation Collection</a> structure to handle paginated requests,
+                    whereas this document defines an [=AnnotationSet=] structure to group multiple annotations for sharing purposes.
+                    Implementers MUST support [=AnnotationSet=] and MAY support both structures for maximum compatibility.
+                </li>
+            </ul>
+            <p class="note">This document does not define how annotations are created, stored, or synchronized in a reading system. </p>
+
+            <section>
+                <h2>Relationship to URL</h2>
+                <p>To be consistent with [[[epub-34]]], this specification refers to the [[url]] standard for terminology
+                    and processing related to URLs expressed in [=EPUB publications=] and in <a href="#dfn-annotation-object">Annotations Objects</a>.
+                    The additional constraints expressed in <a data-cite="epub-34#sec-overview-relations-url"></a> also apply.
+                    Note that this is a difference with the [[[annotation-model]]] which uses the term IRI [[rfc3987]]. This difference does
+                    not alter the structure of the Data Model used by this specification.
+                </p>
+            </section>
+
+        </section>
+        <section>
+            <h1>Annotation</h1>
+            <section>
+                <h2>Annotation Object</h2>
+                <p> The <dfn>Annotation object</dfn> retains the following annotation properties from the
+                    <a data-cite="annotation-model#annotations">Web Annotation object</a> [[annotation-model]]:
+                </p>
+                <table class="zebra">
+                    <thead>
+                        <tr>
+                            <th> Name </th>
+                            <th> Description </th>
+                            <th> Format </th>
+                            <th> Required? </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <code> id </code>
+                            </td>
+                            <td>The identity of the annotation. A uuid formatted as a URN is RECOMMENDED.</td>
+                            <td>URL</td>
+                            <td>Yes</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> type </code>
+                            </td>
+                            <td>The RDF structure type. It MUST be "Annotation".</td>
+                            <td> string </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>motivation</dfn> </code>
+                            </td>
+                            <td>The motivation for the annotation's creation.</td>
+                            <td>"bookmarking" | "commenting" | "highlighting"</td>
+                            <td>No</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>created</dfn> </code>
+                            </td>
+                            <td>The time when the annotation was created.</td>
+                            <td> ISO 8601 datetime </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>modified</dfn> </code>
+                            </td>
+                            <td>The time the annotation was modified after creation.</td>
+                            <td> ISO 8601 datetime </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>creator</dfn> </code>
+                            </td>
+                            <td>The creator of the annotation. This may be a human, an
+                                organization or a software agent.<br></td>
+                            <td> [=Creator object=] </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>target</dfn> </code>
+                            </td>
+                            <td>The target content of the annotation.</td>
+                            <td> [=Target object=] </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>body</dfn> </code>
+                            </td>
+                            <td>The annotation body.</td>
+                            <td> [=Body object=] </td>
+                            <td> No </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="note">The [[annotation-model]] specification is fairly open ended as for the value of, for
+                    example, the <code>body</code> property. This specification restricts the value by defining specific classes that
+                    must be used, see the definitions for
+                    [=Creator=], [=Target=], and [=Body=] below.
+                </p>
+
+                <p class="note">The type of annotation should be considered when determining the value of the
+                    [=motivation=] property.
+                    An annotation with a Body structure corresponds to a "comment".
+                    An annotation without Body structure corresponds to a "highlight" if its Selector defines a range of characters,
+                    a region in an image, or a time period,
+                    and a "bookmark" if it does not.
+                </p>
+
+                <p class="ednote">We should specify whether a property may appear at most once (body, target) because
+                    that is also part of
+                    the profile definition. This can be a separate column ("cardinality") or be added to the
+                    description. This remark may be valid
+                    for all the tables in the document.
+                </p>
+
+                <p class="issue" data-number="2884"></p>
+
+                <aside class="example" title="Core structure of an EPUB annotation">
+                    <pre>
+                {
+                    "@context": "https://www.w3.org/ns/epub-anno.jsonld",
+                    "id": "urn:uuid:123-123-123-123",
+                    "type": "Annotation",
+                    "created": "2023-10-14T15:13:28Z",
+                    "modified": "2024-01-29T09:00:00Z",
+                    "target": {
+                        …
+                    },
+                    "body": {
+                        …
+                    }
+                }
+			</pre>
+                </aside>
+
+            </section>
+            <section>
+                <h2>Creator</h2>
+                <p> The <dfn>Creator object</dfn> of an annotation is a person, an organization or a software agent.
+                </p>
+                <p> This document defines the following creator properties: </p>
+                <table class="zebra">
+                    <thead>
+                        <tr>
+                            <th> Name </th>
+                            <th> Description </th>
+                            <th> Format </th>
+                            <th> Required? </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <code> id </code>
+                            </td>
+                            <td> The identity of the creator. </td>
+                            <td> URL </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> type </code>
+                            </td>
+                            <td> Type of the creator. It MUST be "Person", "Organization" or "Software". </td>
+                            <td> string </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> name </code>
+                            </td>
+                            <td> The name of the creator. </td>
+                            <td> Localizable text </td>
+                            <td> No </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section>
+                <h2>Target</h2>
+                <p>The <dfn>Target object</dfn> of an annotation associates the annotation with a specific segment of a
+                    resource in the current publication.</p>
+                <p> This document defines three target sub-properties: </p>
+                <table class="zebra">
+                    <thead>
+                        <tr>
+                            <th> Name </th>
+                            <th> Description </th>
+                            <th> Format </th>
+                            <th> Required? </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <code> <dfn>source</dfn> </code>
+                            </td>
+                            <td> The identity of the target EPUB resource. </td>
+                            <td> URL </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>selector</dfn> </code>
+                            </td>
+                            <td> The segment of the target EPUB resource that is annotated. </td>
+                            <td> Array of Selector objects </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>meta</dfn> </code>
+                            </td>
+                            <td> Indications that help locate the segment in the resource. </td>
+                            <td> Meta </td>
+                            <td> No </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p> A Target with no Selector indicates that the annotation applies to the entire
+                    target resource. </p>
+
+                <section>
+                    <h3>Source</h3>
+                    <p> The target resource MUST be identified by the URL of an existing resource in the
+                        EPUB package. It MUST be one of the `item/@href` values of the [^manifest^] element as
+                        defined in [[epub-34]].</p>
+
+                    <aside class="example"
+                        title=" the source of the annotation is the relative URL identifying an HTML document in an EPUB">
+                        <pre>
+                {
+                    "@context": "https://www.w3.org/ns/epub-anno.jsonld",
+                    "type": "Annotation",
+                    "target": {
+                        "source": "OEBPS/text/chapter1.html",
+                        "selector": [
+                        …
+                        ],
+                        "meta": {
+                        …
+                        }
+                    }
+                }
+				</pre>
+                    </aside>
+                </section>
+
+                <section>
+                    <h1>Selector</h1>
+
+                    <p>
+                        An annotation refers to a segment of a resource, which is identified by one or more
+                        <a data-cite="annotation-model#selectors">Selectors</a>.
+                        The nature of the Selectors and methods to describe segments depend on
+                        the resource type. Providing more than one Selector allows an annotation software to
+                        choose the most accurate selector from those it can handle and helps to accommodate
+                        evolutions on the annotated resource.
+                    </p>
+                    <p>
+                        Several annotation selectors are specified in the
+                        <a data-cite="annotation-model#selectors">Web Annotation Data Model</a>.
+                        This specification retains selectors (with possible restrictions) deemed useful for
+                        annotating EPUB publications, and details on how to use these selectors.
+                        <!-- It also defines new selectors as needed. -->
+                    </p>
+
+                    <section>
+                        <h4>Fragment Selector</h4>
+                        <p>
+                            The <dfn>Fragment Selector object</dfn> uses the fragment part of an URL defined by the
+                            representation's media type. This object is identical in structure to the
+                            <a data-cite="annotation-model#fragment-selector">Fragment Selector</a> defined by
+                            [[[annotation-model]]], except that it restricts the media types it may use.
+                        </p>
+
+                        <table class="zebra">
+                            <thead>
+                                <tr>
+                                    <th> Name </th>
+                                    <th> Description </th>
+                                    <th> Format </th>
+                                    <th> Required? </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code> type </code>
+                                    </td>
+                                    <td>The RDF structure type. It MUST be "FragmentSelector".</td>
+                                    <td> string </td>
+                                    <td> Yes </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code> <code>value</code> </code>
+                                    </td>
+                                    <td>The contents of the fragment component of an URL that describes the selection.
+                                        The selector MUST have exactly 1 <code>value</code> property.</td>
+                                    <td> string </td>
+                                    <td> Yes </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code> <dfn>conformsTo</dfn> </code>
+                                    </td>
+                                    <td>
+                                        Provides the reference to the specification that defines the syntax of the URL
+                                        fragment in the
+                                        <code>value</code> property. The selector SHOULD have exactly 1 conformsTo link
+                                        to
+                                        the specification that defines the syntax of the fragment and MUST NOT have more
+                                        than 1.
+                                    </td>
+                                    <td>
+                                        One of the URL strings listed in the table below.
+                                    </td>
+                                    <td> No </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p>
+                            The following URLs are the specifications that define the semantics of fragments, and hence
+                            may be used with the
+                            [^conformsTo^] property. Other URLs MUST NOT be used.
+                        </p>
+
+                        <!-- cheating: I reuse a common css entry done for media types, hence the choice of the ID -->
+                        <table id="tbl-core-media-types">
+                            <thead>
+                                <th>Name</th>
+                                <th>Fragment Specification</th>
+                                <th>Description</th>
+                            </thead>
+                            <tbody>
+                                <tr id="HTML_fragment_format">
+                                    <td>HTML</td>
+                                    <td>http://tools.ietf.org/rfc/rfc3236</td>
+                                    <td>[[rfc3236]]. Example: <code>namedSection</code></td>
+                                </tr>
+                                <tr id="media_fragment_format">
+                                    <td>Media</td>
+                                    <td>http://www.w3.org/TR/media-frags/</td>
+                                    <td>[[media-frags]]. Example: <code>xywh=50,50,640,480</code> or
+                                        <code>t=10,20</code>
+                                    </td>
+                                </tr>
+                                <tr id="SVG_fragment_format">
+                                    <td>SVG</td>
+                                    <td>http://www.w3.org/TR/SVG/</td>
+                                    <td>[[svg11]]. Example: <code>svgView(viewBox(50,50,640,480))</code></td>
+                                </tr>
+                                <tr id="text_fragment_format">
+                                    <td>Text fragment</td>
+                                    <td>https://wicg.github.io/scroll-to-text-fragment/</td>
+                                    <td>[[scroll-to-text-fragment]]. Example:
+                                        <code>:~:text=an%20example,text%20fragment</code>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <div class="caution">
+                            <p>
+                                This selector, used with text fragments, must be used with great care when the number
+                                of characters that can be copied from the publication is constrained by the publisher.
+                            </p>
+                        </div>
+
+                        <div class="note">
+
+                            <p>The integration of text fragments into the specification is AT RISK.
+                                The reason is two-fold:
+                            </p>
+
+                            <ol>
+                                <li>
+                                    The specification is currently a Draft Community Group Report. While there is an
+                                    activity to include it into the HTML Standard [[html]], this is still ongoing.
+                                    It may not be finalized by the time this specification goes to Recommendation.
+                                    See also <a href="https://github.com/whatwg/html/pull/11895">whatwg#11895</a>.
+                                </li>
+                                <li>
+                                    The integration of text fragments selector in reading systems is very challenging:
+                                    the absence of a standard API in web browsers makes mapping a text fragment to
+                                    a DOM Range difficult.
+                                    Rebuilding a DOM range from a textual range using tree walking is suboptimal,
+                                    and the existing polyfills are not well-maintained. This fragment specification
+                                    cannot be retained unless a public API is defined and implemented in major web
+                                    browsers.
+                                    See also <a href="https://github.com/whatwg/html/issues/8282">whatwg#8282</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <section class="informative">
+                        <h4>CSS Selector</h4>
+                        <p>
+                            One of the most common ways to select elements in the HTML Document Object Model is to use
+                            CSS Selectors [[CSS3-selectors]]. This specification reuses the <a
+                                data-cite="annotation-model#css-selector"><code>CssSelector</code></a>, as defined in
+                            the [[[annotation-model]]] specification, but lists it here for an easier readability.
+                        </p>
+
+                        <table class="zebra">
+                            <thead>
+                                <tr>
+                                    <th> Name </th>
+                                    <th> Description </th>
+                                    <th> Format </th>
+                                    <th> Required? </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code> type </code>
+                                    </td>
+                                    <td>The RDF structure type. It must be "CssSelector".</td>
+                                    <td> string </td>
+                                    <td> Yes </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code> value </code>
+                                    </td>
+                                    <td>The CSS selection path to the target.
+                                        The selector must have exactly 1 <code>value</code> property.</td>
+                                    <td> string </td>
+                                    <td> Yes </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+
+                    <!-- <section class="informative">
+                                            <h5>Text Quote Selector</h5>
+                                            <p>
+                                                This Selector describes a range of text by copying it, and including some of the text
+                                                immediately before (a prefix) and after (a suffix) it to distinguish between multiple
+                                                copies of the same sequence of characters.
+                                                This specification reuses the <a
+                                                    data-cite="annotation-model#text-quote-selector"><code>TextQuoteSelector</code></a>,
+                                                as defined in the [[[annotation-model]]] specification, but lists it here for an easier
+                                                readability.
+                                            </p>
+                                            <p>
+                                                The selection of the text must be in terms of unicode code points (the "character number").
+                                            </p>
+                                            <table class="zebra">
+                                                <thead>
+                                                    <tr>
+                                                        <th> Name </th>
+                                                        <th> Description </th>
+                                                        <th> Format </th>
+                                                        <th> Required? </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <code> type </code>
+                                                        </td>
+                                                        <td>The RDF structure type. It must be "TextQuoteSelector".</td>
+                                                        <td> string </td>
+                                                        <td> Yes </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <code> <code>exact</code> </code>
+                                                        </td>
+                                                        <td>
+                                                            A copy of the text which is being selected, after normalization.
+                                                            Each <code>TextQuoteSelector</code> must have exactly 1 <code>exact</code>
+                                                            property.
+                                                        </td>
+                                                        <td> string </td>
+                                                        <td> Yes </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <code> <code>prefix</code> </code>
+                                                        </td>
+                                                        <td>
+                                                            A snippet of text that occurs immediately before the text which is being
+                                                            selected.
+                                                            Each <code>TextQuoteSelector</code> should have exactly 1 <code>prefix</code>
+                                                            property, and must not have more than 1.
+                                                        </td>
+                                                        <td> string </td>
+                                                        <td> No </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <code> <code>suffix</code> </code>
+                                                        </td>
+                                                        <td>
+                                                            A snippet of text that occurs immediately after the text which is being
+                                                            selected.
+                                                            Each <code>TextQuoteSelector</code> SHOULD have exactly 1 <code>suffix</code>
+                                                            property, and MUST NOT have more than 1.
+                                                        </td>
+                                                        <td> string </td>
+                                                        <td> No </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <p class="note">
+                                                This selector is equivalent to the usage of a [^Fragment Selector object^] conforming to <a
+                                                    href="#text_fragment_format">Text Fragments</a>. The advantage of using this selector
+                                                is that there is no need for the percent-encoding of the exact, prefix, and suffix texts.
+                                            </p>
+                                            <p class="issue">
+                                                See the caveats on using text fragments in the section on <a
+                                                    href="#fragment-selector">Fragment Selectors</a>.
+                                            </p>
+                                        </section> -->
+
+
+                    <section class="informative">
+                        <h4>Text Position Selector</h4>
+                        <p>
+                            This Selector describes a range of text by recording the start and end positions of the
+                            selection in the stream.
+                            Position 0 would be immediately before the first character, position 1 would be immediately
+                            before the second character, and so on.
+
+                            This specification reuses the <a
+                                data-cite="annotation-model#text-position-selector"><code>TextPositionSelector</code></a>,
+                            as defined in the [[[annotation-model]]] specification, but lists it here for an easier
+                            readability.
+                        </p>
+
+                        <table class="zebra">
+                            <thead>
+                                <tr>
+                                    <th> Name </th>
+                                    <th> Description </th>
+                                    <th> Format </th>
+                                    <th> Required? </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <code> type </code>
+                                    </td>
+                                    <td>The RDF structure type. It must be <code>TextPositionSelector</code>.</td>
+                                    <td> string </td>
+                                    <td> Yes </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code> start</code>
+                                    </td>
+                                    <td>
+                                        The starting position of the segment of text. The first character in the full
+                                        text is character position 0, and the character is included within the segment.
+                                        Each <code>TextPositionSelector</code> must have exactly 1 <code>start</code>
+                                        property, and the value must be a non-negative integer.
+                                    </td>
+                                    <td> non-negative integer </td>
+                                    <td> Yes </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <code> end </code>
+                                    </td>
+                                    <td>
+                                        The end position of the segment of text. The character is not included within
+                                        the segment.
+                                        Each <code>TextPositionSelector</code> must have exactly 1 <code>end</code>
+                                        property, and the value must be a non-negative integer.
+                                    </td>
+                                    <td> non-negative integer </td>
+                                    <td> Yes </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>
+                            The text must be selected and normalized in the same way as for the <a
+                                data-cite="annotation-model#text-quote-selector">Text Quote Selector</a> before counting the
+                            number of characters to determine the start and end positions.
+                        </p>
+
+                        <p class="issue" data-number="2927"></p>
+                    </section>
+
+                    <section>
+                        <h4>Refinement of Selection</h4>
+                        <p>
+                            It may be easier, more reliable, or more accurate to specify the segment of interest of a
+                            resource as a selection of a selection, rather than as a selection of the complete resource.
+                            This is accomplished by having selectors chained together, where each refines the results
+                            of the previous one.
+                        </p>
+                        <p>
+                            The [[[annotation-model]]] specification defines the <a
+                                data-cite="annotation-model#refinement-of-selection"><code>refinedBy</code></a>
+                            property. This specification restricts the possible values of the property to include only
+                            those selectors that are specified by, or listed in this specification.
+                        </p>
+                        <table class="zebra">
+                            <thead>
+                                <tr>
+                                    <th> Name </th>
+                                    <th> Description </th>
+                                    <th> Format </th>
+                                    <th> Required? </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <dfn>refinedBy</dfn>
+                                    </td>
+                                    <td>
+                                        The relationship between a broader selector and the more specific selector that
+                                        SHOULD be applied to the results of the first.
+                                        A Selector MAY be refined by 1 or more other Selectors. If more than 1 is
+                                        given, then they are considered to be alternatives that will result in
+                                        the same selection.
+                                    </td>
+                                    <td> "FragmentSelector" | <br />
+                                        "CssSelector" | <br />
+                                        "TextPositionSelector"<br />
+                                    </td>
+                                    <td> No </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <aside class="example" title=" a CSS Selector refined by a Text Position Selector">
+                            <pre>
+                        <code class="lang-json">
+                            {
+                                "selector": [
+                                    {
+                                        "type": "CssSelector",
+                                        "value": "#intro > p:nth-child(2)",
+                                        "refinedBy": {
+                                            "type": "TextPositionSelector",
+                                            "start": 4,
+                                            "end": 19
+                                        }
+                                    }
+                                ]
+                            }
+                        </code>
+                    </pre>
+                        </aside>
+                        <p>This selects "q" from "quick" as start position and
+                            "x" from "fox" as end position in the following HTML snippet: </p>
+                        <pre>
+&lt;div id="intro">
+    &lt;p>Some text.&lt;/p>
+    &lt;p>The quick &lt;em>brown&lt;/em> fox jumps over the lazy dog.&lt;/p>
+    &lt;p>The lazy &lt;em>white&lt;/em> dog sleeps with the crazy fox.&lt;/p>
+&lt;/div>
+</pre>
+                    </section>
+
+
+               </section>
+                <section>
+                    <h4>Meta</h4>
+
+                    <p>The <dfn>Meta object</dfn>… T.B.D.</p>
+                    <p class="issue" data-number="2852"></p>
+
+                </section>
+            </section>
+
+            <section>
+                <h2>Body</h2>
+                <p>The <dfn>Body object</dfn> of an annotation contains either plain text and style information,
+                    or a reference to an external audiovisual resource. It can also include optional tags.</p>
+                <p>This document specifies the following sub-properties of annotations:</p>
+                <table class="zebra">
+                    <thead>
+                        <tr>
+                            <th> Name </th>
+                            <th> Description </th>
+                            <th> Format </th>
+                            <th> Required? </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <code> type </code>
+                            </td>
+                            <td> The body type. </td>
+                            <td> "TextualBody" | "Image" | "Audio" | "Video" </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> format </code>
+                            </td>
+                            <td> The media-type of the note. Only plain text is allowed for textual notes.
+                                Audiovisual notes can be of any media type supported by EPUB,
+                                see EPUB Media Types <!--<a data-cite="epub34#sec-core-media-types">EPUB Media Types</a>-->.
+                            </td>
+                            <td> string </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> value </code>
+                            </td>
+                            <td> The  content of a textual note. </td>
+                            <td> Localizable text </td>
+                            <td> Yes, if type is "TextualBody". Not applicable for audiovisual notes. </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> id </code>
+                            </td>
+                            <td> The relative URL of the audiovisual note. </td>
+                            <td> URL </td>
+                            <td> Yes, if type is "Image", "Audio", or "Video". Not applicable for textual notes. </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>color</dfn> </code>
+                            </td>
+                            <td> The color of the annotation; yellow by default. </td>
+                            <td> "pink" | "orange" | "yellow" | "green" | "blue" | "purple" </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>highlight</dfn> </code>
+                            </td>
+                            <td> The style of the annotation; solid background by default. </td>
+                            <td> "solid" | "underline" | "strikethrough" | "outline" </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> <dfn>tags</dfn> </code>
+                            </td>
+                            <td> Free text categorizing the annotation. </td>
+                            <td> Array of string </td>
+                            <td> No </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="note">
+                    The terms used for [=color=] and [=highlight=] (e.g., "pink", "orange",
+                    "solid", etc.) are only labels.
+                    They are not meant to denote precise values (e.g., `#ffc0cb` for "pink").
+                    Instead, they represent the terms usually used by Reading Systems.
+                    The terms are mapped onto real values depending on factors like user
+                    preference (e.g. color themes) or device characteristics (e.g. display type).
+                </p>
+
+                <p class="note">
+                    The format for a "TextualBody" is restricted to plain text.
+                    Markdown was also considered, but current practice among Reading Systems
+                    is to use text without any formatting in annotations.
+                    Consequently, defining Markdown as an alternative in the exchange format
+                    would have very little chance of being implemented.
+                    A further issue is the great variety of Markdown-based formats, without any one
+                    being stable enough to be referenced normatively.
+                    Future versions of this specification may reconsider this.
+                </p>
+
+                <p class="note">Read “Best practices for Reading Systems” about using tags in an annotation. </p>
+                <aside class="example" title="An annotation Body">
+                    <pre>
+   {
+        "@context": "https://www.w3.org/ns/epub-anno.jsonld",
+        "type": "Annotation",
+        "body": {
+            "type": "TextualBody",
+            "value": "j'adore !",
+            "tags": ["teacher"],
+            "color": "blue",
+            "highlight": "underline"
+        }
+    }
+			        </pre>
+                </aside>
+
+                <aside class="example" title="An audio Body">
+                    <pre>
+   {
+        "@context": "https://www.w3.org/ns/epub-anno.jsonld",
+        "type": "Annotation",
+        "body": {
+            "type": "Audio",
+            "id": "./voice1.mp3",
+            "tags": ["correction"],
+            "color": "pink",
+        }
+    }
+			        </pre>
+                </aside>
+
+            </section>
+        </section>
+
+        <section>
+            <h1>Annotation Set</h1>
+            <p>An Annotation Set is an unordered collection of annotations.</p>
+
+            <p>An Annotation does not contain information about its associated publication. If a
+                set of annotations is shared as a detached file, it is mandatory to also export
+                information that will help find the associated publication, even if the publication
+                is not adequately identified.</p>
+
+            <p class="note">The <a
+                    data-cite="annotation-model#annotation-collection"><code>AnnotationCollection</code></a> defined
+                in the [[[annotation-model]]] does not provide an adequate
+                structure for sharing annotations either as a detached file or in an EPUB package.
+                The <code>AnnotationCollection</code> provides a
+                way to retrieve annotations via a REST API and is, therefore, intrinsically paginated.</p>
+
+            <p> The <dfn>AnnotationSet</dfn> contains: </p>
+            <table class="zebra">
+                <thead>
+                    <tr>
+                        <th> Name </th>
+                        <th> Description </th>
+                        <th> Format </th>
+                        <th> Required? </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <code> id </code>
+                        </td>
+                        <td> The identity of the annotation set. A uuid formatted as a URN is
+                            RECOMMENDED. </td>
+                        <td> URL </td>
+                        <td> Yes </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code> type </code>
+                        </td>
+                        <td> It MUST be <code>AnnotationSet</code>. </td>
+                        <td> string </td>
+                        <td> Yes </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code><dfn>generator</dfn></code>
+                        </td>
+                        <td> The agent responsible for the generation of the object serialization. </td>
+                        <td> [=Generator=] </td>
+                        <td> No </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code>generated</code>
+                        </td>
+                        <td> The time when the set was generated. </td>
+                        <td> ISO 8601 datetime </td>
+                        <td> No </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code><dfn>about</dfn></code>
+                        </td>
+                        <td> Information relative to the publication. </td>
+                        <td> [=About=] </td>
+                        <td> Yes </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <code><dfn>items</dfn></code>
+                        </td>
+                        <td> The set of annotations. </td>
+                        <td> Array of Annotation objects </td>
+                        <td> Yes </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <section>
+                <h2>Generator</h2>
+                <p>The <dfn>Generator object</dfn> contains information relative to the software from which the
+                    serialized annotation has been produced.</p>
+                <table class="zebra">
+                    <thead>
+                        <tr>
+                            <th> Name </th>
+                            <th> Description </th>
+                            <th> Format </th>
+                            <th> Required? </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <code> id </code>
+                            </td>
+                            <td> The identity of the generator software. The recommended value is the
+                                GitHub URL of the application source code. </td>
+                            <td> URL </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> type </code>
+                            </td>
+                            <td> The RDF type. It MUST be "Software". </td>
+                            <td> string </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> name </code>
+                            </td>
+                            <td> The name of the generator software. </td>
+                            <td> string </td>
+                            <td> Yes </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> homepage </code>
+                            </td>
+                            <td> The home page presenting the generator software. </td>
+                            <td> URL </td>
+                            <td> No </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>About</h2>
+                <p> The <dfn>About object</dfn> contains information relative to the publication. Such metadata is
+                    intended to help associate an annotation set with a publication: </p>
+                <table class="zebra">
+                    <thead>
+                        <tr>
+                            <th> Name </th>
+                            <th> Description </th>
+                            <th> Format </th>
+                            <th> Required? </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <code> dc:identifier </code>
+                            </td>
+                            <td> Publication identifiers. An ISBN is preferred. </td>
+                            <td> Array of strings </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> dc:format </code>
+                            </td>
+                            <td> The media type of the publication. </td>
+                            <td> string </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> dc:title </code>
+                            </td>
+                            <td> The title of the publication. </td>
+                            <td> Localizable text </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> dc:publisher </code>
+                            </td>
+                            <td> The name of the publisher. </td>
+                            <td> Localizable text </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> dc:creator </code>
+                            </td>
+                            <td> The author(s) of the publication. </td>
+                            <td> array of Localizable texts </td>
+                            <td> No </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code> dc:date </code>
+                            </td>
+                            <td> The release year. </td>
+                            <td> calendar year using four digits </td>
+                            <td> No </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="note">
+
+                    All properties are from the Dublin Core Vocabulary [[dcterms]], also referenced
+                    in the [[[annotation-model]]] as well as in the EPUB <a data-cite="epub-34#sec-pkg-metadata">package
+                        document metadata</a>.
+
+                    Implementers are free to add other properties from the Dublin Core Vocabulary, or to use properties from other vocabularies, as long as they are properly declared in the context file.
+                </p>
+
+                <aside class="example" title="An AnnotationSet containing one annotation">
+                    <pre>
+    {
+        "@context": "https://www.w3.org/ns/epub-anno.jsonld",
+        "id": "urn:uuid:123-123-123-123",
+        "type": "AnnotationSet",
+        "generator": "https://github.com/edrlab/thorium-reader/releases/tag/v3.1.0",
+        "generated": "2023-09-01T10:00:00Z",
+        "about": {
+            "dc:identifier": [
+                "urn:isbn:1234567890"
+            ],
+            "dc:format": "application/epub+zip",
+            "dc:title": "Alice in Wonderland",
+            "dc:publisher": "Example Publisher",
+            "dc:creator": ["Anne O'Tater"],
+            "dc:date": "1865"
+        },
+        "items": [
+            {
+                "id": "urn:uuid:234-234-234-234",
+                "type": "Annotation",
+                "target": {
+                },
+                "body": {
+                }
+            }
+        ]
+    }
+                    </pre>
+                </aside>
+            </section>
+        </section>
+        <section>
+
+            <h1>Serialization of an AnnotationSet</h1>
+            <p>
+                Following the [[[annotation-model]]] [[annotation-model]] specification, EPUB Annotations are
+                expressed as JSON-LD [[json-ld11]] (a variant of JSON [[ecma-404]] for linked data).
+                The model is informally defined through a JSON Schema [[json-schema]]; see <a href="#json-schema"></a>
+                for further details.
+                The media type of this model is
+                <code>application/ld+json;profile="http://www.w3.org/ns/anno.jsonld"</code>
+            </p>
+
+            <aside class="example" title="Required context declaration">
+                <pre>
+                    {
+                        "@context": "https://www.w3.org/ns/epub-anno.jsonld",
+                        "type": "AnnotationSet",
+                        "id": "urn:uuid:123-123-123-123",
+                        …
+                    }
+                </pre>
+            </aside>
+
+            <p>
+                The data model is inherently extensible: implementations may add reading system
+                dependent terms, e.g., a reference to user color profiles.
+            </p>
+
+            <p class="note">
+                Implementations that do not rely on the linked data aspects of annotations may rely on bespoke
+                processing based on the shape of the annotation or the annotation set.
+                Such implementations may safely ignore the context
+                declarations and are not required to dereference the respective URLs.
+            </p>
+
+            <section>
+
+                <p> An AnnotationSet can be shared as a detached file, or embedded in an EPUB package.
+                    The advantage of detached annotations is that they can be shared independently of the publication,
+                    and that they can be associated with a publication without modifying it.
+                    The advantage of embedded annotations is that they are always available to users of the publication,
+                    without any need to import them.
+
+                <p class="note">
+                    Reading Systems are not required to store annotations with such a format: this format is for export and import purposes.
+                </p>
+
+                </p>
+
+                <h2>Detached annotations</h2>
+
+                <p> For packaging the set of constituent resources that comprise an AnnotationSet,
+                    this specification uses the ZIP format
+                    as specified in ISO/IEC 21320-1:2015 ([[ISO21320]] and [[zip]]). </p>
+
+                <p> This specification introduces a dedicated file extension for detached annotations:
+                    <code>.annotations</code>.
+                </p>
+
+                <p> The media type of this file is
+                    <code>application/zip;profile="https://www.w3.org/TR/epub-anno-10/"</code>. </p>
+
+                <p> The serialized AnnotationSet is stored in the ZIP file as <code>annotations.json</code>, in the root of the ZIP file.
+                    Audiovisual notes, if present, MAY be in any location descendant from the root of the ZIP file.
+                    Annotation bodies within the AnnotationSet MUST reference these resources via relative-URL strings [[url]].</p>
+
+                <div class="note">
+                    <p> The [[zip]] specification has few constraints on the characters allowed
+                        for file and directory names.
+                        When crafting such names, authors must be careful to use characters which
+                        allow a broad interoperability among operating systems.</p>
+                </div>
+
+                <section>
+                    <h3>Importing detached annotations</h3>
+
+                    <p>
+                        When a reading system imports detached annotations, it SHOULD check
+                        whether those annotations are indeed for the publication being rendered.
+                        Because there are no universally accepted identifiers for EPUB publications, this process involves some
+                        heuristics that depend on the reading system, such as comparing the content of the [=package document=]
+                        with the metadata assigned to the imported annotations, or checking whether the target resources
+                        of the annotation selectors are valid.
+                        This process MAY require user interaction via the reading system's user interface.
+                        In any case, information about the imported annotations SHOULD be provided to the user.
+                    </p>
+                </section>
+            </section>
+
+            <section>
+
+                <h2>Annotations embedded in EPUB</h2>
+
+                <p> The AnnotationSet is stored in the META-INF directory as <code>annotations.json</code>.
+                    Audiovisual notes, if present, MAY be in any location descendant from the META-INF directory,
+                    or in the META-INF directory itself.
+                    Annotation bodies within the AnnotationSet MUST reference these resources via relative-URL strings [[url]].</p>
+
+                <div class="note">
+                    <p> Storing audiovisual notes in the META-INF directory has implications for the size of the EPUB package, and is therefore not recommended.</p>
+                </div>
+
+            </section>
+
+        </section>
+
+        <section class="informative">
+            <h1>Best Practices for Reading Systems</h1>
+
+            <section>
+                <h2> Displaying filtered annotations </h2>
+                <p> It is recommended that Reading systems  enable filtering by motivation, creator, style and tags.
+                    For instance, a user can display &quot;blue&quot; colored annotations only, or
+                    &quot;typo&quot; tagged annotations only. Filtering on multiple criteria is a plus. </p>
+
+            </section>
+
+            <section>
+                <h2> Using multiple selectors </h2>
+                <p> It is recommended that Reading Systems export multiple selectors, including at least
+                    one precise selector (e.g. CssSelector + TextPositionSelector),
+                    and one selector resistant to content modifications (e.g., based on text fragments).
+                </p>
+                <p> When displaying an annotation, a Reading System is free to use the most precise
+                    Selector available. It will select an alternative Selector as a fallback in case the
+                    preferred one does not return a correct position in the publication: this can happen
+                    if the publication has been modified after the annotation has been created. </p>
+                <p> Not all selectors are equally easy to implement. Reading Systems are free to choose to
+                    support only a subset of the selectors defined in this specification. </p>
+
+            </section>
+
+            <section>
+                <h2>Exporting annotations as a detached file</h2>
+                <p> When a user decides to export an annotation set from a reading system, it is good to
+                    propose them to filter annotations by motivation, creator, style and tags. The advantage of
+                    this practice is that, for instance, a user can export personal annotations only. </p>
+                <p> The application can propose alternative formats at export time: an HTML or markdown format
+                    with human-friendly references to the location of each annotation is handy. </p>
+
+            </section>
+
+            <section>
+                <h2>Exporting annotations embedded in an EPUB </h2>
+                <p> When a user decides to export a publication from the Reading System, it is good to
+                    propose them to embed the annotations associated with the publication. </p>
+                <p> If the user decides to embed annotations in the publication, they should be prompted to
+                    filter the annotations. </p>
+
+            </section>
+
+            <section>
+                <h2>Importing annotations</h2>
+                <p> To simplify associating annotations with a publication, a Reading System has to
+                    offer a way to select a publication before selecting an annotation set.
+                    An automatic association of an annotation set with a publication (e.g. via drag and
+                    drop) can also be proposed, but identifying the proper publication from
+                    the metadata in the annotation set is error prone. </p>
+                <p> When importing an annotation set, the good practice for Reading Systems is to
+                    display publication metadata (e.g. title, author), the number of annotations found in the set,
+                    and offer the user the choice to abort the import if the information does not match their expectations. </p>
+                <p> Each annotation is uniquely identified, independently of the annotation set it is part of.
+                    During the import of an annotation set,
+                    if one or more annotations are found to be already stored in the application,
+                    the Reading System will offer the user a choice: either overriding the existing annotations,
+                    or abort the import of the annotation set. </p>
+
+            </section>
+
+            <section>
+                <h2>Dealing with audiovisual notes</h2>
+                <p> This specification provides mechanisms for handling audiovisual notes.</p>
+                <p> If an application does not support audiovisual notes, it has to ignore them
+                    when importing an annotation set. It is good practice to notify the user
+                    that some annotations were not imported due to lack of support. </p>
+
+                </section>
+
+            <section>
+                <h2>Dealing with colors</h2>
+                <p> This document specifies a closed set of six colors chosen because of their
+                    extensive support in well-known reading systems. However, most existing reading apps
+                    offer a smaller set to their users. </p>
+                <p> If an application imports annotations with a color it does not support,
+                    it is good practice to ignore the color information and to
+                    display them with a neutral color. The recommended neutral color is grey. </p>
+                <p> Some applications may support colors not in the set defined by this specification
+                    (e.g. brown). In this case, a 1-to-1 substitution at import or export time is required (e.g.
+                    mapping brown to orange). </p>
+                <p class="note">We didn't spot applications with more than six annotation colors. </p>
+
+            </section>
+
+        </section>
+
+        <section>
+            <h1> JSON Schema </h1>
+
+            <p>T.B.D.</p>
+        </section>
+
+        <section>
+            <h1>Internationalization Considerations</h1>
+
+            <section class="informative">
+                <h2>Localizable texts</h2>
+
+                <p>
+                    The EPUB Annotation model inherits the <a data-cite="json-ld11#string-internationalization">string
+                    internationalization</a> features defined by [[[json-ld11]]].
+                    These may be used for values that are defined as
+                    <a data-cite="i18n-glossary#dfn-localizable-text">localizable texts</a>.
+                    To set the right language metadata, the value is a separate
+                    object with the string value set explicitly through the `stringValue` property.
+                    The `language` and `direction` properties can be used to set the
+                    <a data-cite="i18n-glossary#dfn-language-tag">language tag</a>
+                    and the  <a data-cite="i18n-glossary#dfn-string-direction">string direction</a>, respectively.
+                    The value for `language` is a string representing a [[BCP47]] language tag.
+                    The value for `direction` is a string whose value must be either `"ltr"` or `"rtl"`.
+                </p>
+
+                <p>
+                    In the example below, two annotations within the same [=AnnotationSet=] use different languages.
+                    In the second annotation the string direction is also set to ensure the correct
+                    rendering of the text with mixed Latin and Hebrew characters.
+                </p>
+
+                <aside class="example" title="Setting the language explicitly for localizable texts">
+                    <pre>
+                    {
+                        "@context": "https://www.w3.org/ns/epub-anno.jsonld",
+                        "type": "AnnotationSet",
+                        "id": "urn:uuid:123-456-789",
+                        "items" : [
+                            {
+                                "id": "urn:uuid:123-456-789-a1",
+                                "type": "Annotation",
+                                "body" : {
+                                    "type": "TextualBody",
+                                    "value": {
+                                        "language": "en",
+                                        "text": "HTML is a markup language.",
+                                    }
+                                },
+                                "target" : {
+                                    …
+                                }
+                            },
+                            {
+                                "id": "urn:uuid:123-456-789-a3",
+                                "type": "Annotation",
+                                "body": {
+                                    "type": "TextualBody",
+                                    "value": {
+                                        "language": "he",
+                                        "direction": "rtl",
+                                        "text": <bdo dir="rtl">"HTML היא שפת סימון."</bdo>
+                                    }
+                                },
+                                "target": {
+                                    …
+                                }
+                            },
+                            …
+                        ]
+                    }
+                    </pre>
+                </aside>
+
+                <section>
+                    <h3>Setting the default values</h3>
+
+                    <p>
+                        The default values for `language` and `direction` may be set as part of the context
+                        declaration of the Annotation Set. The value of the top-level `@context` must be
+                        extended with an extra context object (using the JSON array notation) containing the default setting using the the `@language` and `@direction` keywords. See the example below as an alternative for the previous example.
+                    </p>
+
+                    <aside class="example" title="Setting the default language to English">
+                        <pre>
+                        {
+                            "@context": [
+                                "https://www.w3.org/ns/epub-anno.jsonld",
+                                {
+                                    "@language": "en"
+                                }
+                            ],
+                            "type": "AnnotationSet",
+                            "id": "urn:uuid:123-456-789",
+                            "items" : [
+                                {
+                                    "id": "urn:uuid:123-456-789-a1",
+                                    "type": "Annotation",
+                                    "body": {
+                                        "type": "TextualBody",
+                                        "value": "HTML is a markup language."
+                                    },
+                                    "target": {
+                                        …
+                                    }
+                                },
+                                {
+                                    "id": "urn:uuid:123-456-789-a3",
+                                    "type": "Annotation",
+                                    "body": {
+                                        "type": "TextualBody",
+                                        "value": {
+                                            "language": "he",
+                                            "direction": "rtl",
+                                            "text": <bdo dir="rtl">"HTML היא שפת סימון."</bdo>
+                                        }
+                                    },
+                                    "target": {
+                                        …
+                                    }
+                                },
+                                …
+                            ]
+                        }
+                        </pre>
+                    </aside>
+
+                    <p class="note">
+                        The extra object in the context can be used whenever a context is set. For example, it is possible to set the default value for a single annotation.
+                    </p>
+                </section>
+          </section>
+        </section>
+
+        <section>
+            <h1>Privacy Considerations</h1>
+
+            <p>T.B.D.</p>
+        </section>
+
+        <section>
+            <h1>Security Considerations</h1>
+
+            <p>T.B.D.</p>
+        </section>
+        <section class="appendix" id="index"></section>
+        <section class="appendix" id="issue-summary"></section>
+    </body>
+
 </html>

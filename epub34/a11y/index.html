@@ -17,7 +17,7 @@
 				specStatus: "ED",
 				shortName: "epub-a11y-12",
 				edDraftURI: "https://w3c.github.io/epub-specs/epub34/a11y/",
-                // implementationReportURI: "https://w3c.github.io/epub-specs/epub34/reports/",
+                implementationReportURI: "https://w3c.github.io/epub-specs/epub34/reports/",
                 // previousPublishDate: "2023-05-25",
 				// errata: "https://w3c.github.io/epub-specs/epub34/errata.html",
                 // previousMaturity: "REC",
@@ -80,6 +80,11 @@
 						"date": "05 January 2017",
 						"publisher": "IDPF"
 					},
+					"epub-a11y-understand": {
+						"title": "Understanding EPUB Accessibility 1.2",
+						"href": "https://w3c.github.io/epub-specs/epub34/a11y-understand/",
+						"publisher": "W3C"
+					},
 					"epub-3": {
 						"title": "EPUB 3",
 						"href": "https://www.w3.org/TR/epub/",
@@ -132,6 +137,25 @@
 			}
 			#change-log > details > p {
 				margin-left: 1rem;
+			}
+			#sec-epub-req dt {
+				margin-bottom: 1rem;
+			}
+			#sec-epub-req dd {
+				margin-bottom: 2rem;
+			}
+			div.info {
+				float: right;
+				text-align: end;
+				font-size: 90%;
+				background-color: rgb(245, 245, 245);
+				border-left: 0.4rem solid rgb(60, 120, 240);
+				padding: 0.5rem 1rem;
+				margin-top: -3.5rem;
+			}
+			div.info a {
+				display: block;
+				margin-bottom: 0.5rem;
 			}</style>
 	</head>
 	<body>
@@ -151,7 +175,7 @@
 				<p>This specification, EPUB Accessibility, addresses two key needs in the EPUB ecosystem:</p>
 
 				<ul>
-					<li>discoverability of the accessible qualities of <a data-cite="epub/#dfn-epub-publication">EPUB
+					<li>discoverability of the accessible qualities of <a data-cite="epub-3#dfn-epub-publication">EPUB
 							publications</a>; and</li>
 					<li>evaluation and certification of accessible EPUB publications.</li>
 				</ul>
@@ -184,45 +208,67 @@
 				</div>
 			</section>
 
-			<section id="sec-success-techniques" class="informative">
-				<h3>Success techniques</h3>
+			<section id="sec-supporting-docs" class="informative">
+				<h3>Supporting documents</h3>
 
-				<p>This specification takes an abstract approach to the accessibility requirements for <a
-						data-cite="epub/#dfn-epub-publication">EPUB publications</a>, similar to how WCAG [[wcag2]]
-					separates its accessibility guidelines from the techniques to achieve them. This approach allows the
-					guidelines to remain stable even as the format evolves.</p>
+				<p>The following supporting documents provide informative guidance that helps with understanding and
+					implementing this standard:</p>
 
-				<p>To facilitate this approach, the companion <a data-cite="epub-a11y-tech-12#">EPUB Accessibility
-						Techniques</a> [[epub-a11y-tech-12]] document outlines conformance techniques. These techniques
-					explain how to meet the requirements of this specification for different versions of EPUB.</p>
+				<dl>
+					<dt>Understanding EPUB Accessibility</dt>
+					<dd>
+						<p>This document assumes a high level of familiarity with both EPUB 3 [[epub-3]] and WCAG 2
+							[[wcag2]]. It expects that implementers of the standard understand how to apply WCAG 2,
+							which focuses on web content, to an <a data-cite="epub-3#dfn-epub-publication">EPUB
+								publication</a>, which is more like a packaged web site that reads as a single
+							document.</p>
 
-				<section id="sec-sc-i18n">
-					<h4>Internationalization</h4>
+						<p>The [[[epub-a11y-understand]]] [[epub-a11y-understand]] document goes into more detail about
+							how to understand success criteria in the context of an EPUB publication &#8212; when they
+							apply, or not, what to look for in publications, etc. It also explains the additional <a
+								href="#sec-epub-req">EPUB objectives</a> introduced in this document.</p>
+					</dd>
 
-					<p>This specification is also designed to address the accessibility needs of users independent of
-						what languages they read. The same is true for the principles and success criteria defined in
-						[[wcag2]]. The goal is to ensure that users can fully consume the information of a publication
-						regardless of their preferred reading modality.</p>
+					<dt>EPUB Accessibility Techniques</dt>
+					<dd>
+						<p>This specification takes an abstract approach to the accessibility requirements for EPUB
+							publications, similar to how WCAG [[wcag2]] separates its accessibility guidelines from the
+							techniques to achieve them. This approach allows the guidelines to remain stable even as the
+							format evolves.</p>
 
-					<p>At the same time, the language and writing conventions of the authored text will influence the
-						techniques necessary to meet the accessibility requirements. EPUB <a
-							href="https://www.w3.org/TR/epub/#confreq-xml-enc">requires support for Unicode text</a>
-						[[epub-3]], for example, which ensures the correct character data can be used (i.e., avoiding
-						the need to use images of text). Although this is an important feature, it is often not enough
-						on its own to ensure that the text is fully accessible in any given language (e.g., additional
-						information about directionality, emphasis, pronunciation, etc. might also be needed).</p>
+						<p>To facilitate this approach, the companion [[[epub-a11y-tech-12]]] [[epub-a11y-tech-12]]
+							document outlines conformance techniques. These techniques explain how to meet the
+							requirements of this specification for different versions of EPUB.</p>
+					</dd>
+				</dl>
+			</section>
 
-					<p>Consequently, there can also be language- or culture-specific practices for meeting accessibility
-						requirements. Whether these practices are defined within this specification and its techniques
-						or elsewhere (e.g., in WCAG techniques or language-specific best practice recommendations) will
-						depend on whether the issues are specific to EPUB or broadly affect all web content.</p>
-				</section>
+			<section id="sec-sc-i18n" class="informative">
+				<h3>Internationalization</h3>
+
+				<p>This specification is designed to address the accessibility needs of users independent of what
+					languages they read. The same is true for the principles and success criteria defined in [[wcag2]].
+					The goal is to ensure that users can fully consume the information of a publication regardless of
+					their preferred reading modality.</p>
+
+				<p>At the same time, the language and writing conventions of the authored text will influence the
+					techniques necessary to meet the accessibility requirements. EPUB <a
+						href="https://www.w3.org/TR/epub/#confreq-xml-enc">requires support for Unicode text</a>
+					[[epub-3]], for example, which ensures the correct character data can be used (i.e., avoiding the
+					need to use images of text). Although this is an important feature, it is often not enough on its
+					own to ensure that the text is fully accessible in any given language (e.g., additional information
+					about directionality, emphasis, pronunciation, etc. might also be needed).</p>
+
+				<p>Consequently, there can also be language- or culture-specific practices for meeting accessibility
+					requirements. Whether these practices are defined within this specification and its techniques or
+					elsewhere (e.g., in WCAG techniques or language-specific best practice recommendations) will depend
+					on whether the issues are specific to EPUB or broadly affect all web content.</p>
 			</section>
 
 			<section id="sec-application" class="informative">
 				<h3>Application to older versions of EPUB</h3>
 
-				<p>This specification is applicable to any <a data-cite="epub/#dfn-epub-publication">EPUB
+				<p>This specification is applicable to any <a data-cite="epub-3#dfn-epub-publication">EPUB
 						publication</a>, regardless of what version of EPUB it conforms to.</p>
 
 				<p>For example, even though EPUB 2 [[opf-201]] was produced before this specification, and so makes no
@@ -231,7 +277,7 @@
 					version of EPUB 3 to get access to the most advanced accessibility features and techniques.</p>
 
 				<p>Note that EPUB 2 does not support all metadata expressions defined in this specification as it does
-					not have an equivalent to the <a data-cite="epub/#attrdef-refines"><code>refines</code>
+					not have an equivalent to the <a data-cite="epub-3#attrdef-refines"><code>refines</code>
 						attribute</a> [[epub-3]]. If metadata expressions that require a <code>refines</code> attribute
 					cannot be avoided, there will be a certain amount of ambiguity in the statements (i.e.,
 					relationships between expression might only be apparent by their placement in the package document
@@ -241,7 +287,7 @@
 			<section id="sec-terminology">
 				<h3>Terminology</h3>
 
-				<p>This specification uses <a data-cite="epub/#sec-terminology">terminology defined in EPUB 3</a>
+				<p>This specification uses <a data-cite="epub-3#sec-terminology">terminology defined in EPUB 3</a>
 					[[epub-3]].</p>
 
 				<p>It also defines the following term:</p>
@@ -254,7 +300,7 @@
 						<p>This specification uses the <a data-cite="wcag2#dfn-assistive-technologies">definition of
 								assistive technology</a> from [[wcag2]].</p>
 						<p>In the case of EPUB, an assistive technology is not always a separate application from a <a
-								data-cite="epub/#dfn-epub-reading-system">reading system</a>. Reading systems often
+								data-cite="epub-3#dfn-epub-reading-system">reading system</a>. Reading systems often
 							integrate features of standalone assistive technologies, such as text-to-speech
 							playback.</p>
 					</dd>
@@ -265,7 +311,9 @@
 				</div>
 			</section>
 
-			<section id="conformance"></section>
+			<section id="conformance">
+				<p>All explanatory statements in parentheses are <em>non-normative</em>.</p>
+			</section>
 		</section>
 		<section id="sec-discovery">
 			<h2>Discoverability</h2>
@@ -273,7 +321,7 @@
 			<section id="sec-disc-intro" class="informative">
 				<h3>Introduction</h3>
 
-				<p>Unlike web pages, <a data-cite="epub/#dfn-epub-publication">EPUB publications</a> are distributed
+				<p>Unlike web pages, <a data-cite="epub-3#dfn-epub-publication">EPUB publications</a> are distributed
 					through many channels for personal consumption — a model that has made EPUB a successful format for
 					ebooks and other types of digital publications. A consequence of this model, however, is that
 					specific details about the accessibility of a publication have to travel with it.</p>
@@ -299,8 +347,8 @@
 			<section id="sec-disc-package">
 				<h3>Package metadata</h3>
 
-				<p>All <a data-cite="epub/#dfn-epub-publication">EPUB publications</a> MUST include [[schema-org]]
-					accessibility metadata in the <a data-cite="epub/#dfn-package-document">package document</a> that
+				<p>All <a data-cite="epub-3#dfn-epub-publication">EPUB publications</a> MUST include [[schema-org]]
+					accessibility metadata in the <a data-cite="epub-3#dfn-package-document">package document</a> that
 					exposes their accessible properties, regardless of whether the publications also meet the <a
 						href="#sec-accessible-pubs">accessibility</a> or <a href="#app-optimized-pubs">optimization</a>
 					requirements.</p>
@@ -349,8 +397,8 @@
 					</li>
 				</ul>
 
-				<p><a data-cite="epub/#dfn-epub-publication">EPUB publications</a> MAY include additional [[schema-org]]
-					accessibility metadata not specified in this section.</p>
+				<p><a data-cite="epub-3#dfn-epub-publication">EPUB publications</a> MAY include additional
+					[[schema-org]] accessibility metadata not specified in this section.</p>
 
 				<div class="note">
 					<p>This specification assumes that conformance and discoverability metadata will be processed and
@@ -367,11 +415,10 @@
 				</div>
 
 				<div class="note">
-					<p>Refer to the <a
-							href="https://w3c.github.io/publ-a11y/epub-a11y-meta-guide/1.0/draft/#sec-discovery">EPUB
-							Accessibility Metadata Guidelines</a> for more information on these properties and how to
-						include them in different versions of EPUB. See also <a
-							data-cite="epub-a11y-tech-12#dist-a11y-metadata">Include accessibility metadata in
+					<p>Refer to the <a href="https://w3c.github.io/publ-a11y/package-metadata-authoring-guide/"
+							>Expressing Accessibility Metadata in the EPUB Package Document</a> guide for more
+						information on these properties and how to include them in different versions of EPUB. See also
+							<a data-cite="epub-a11y-tech-12#dist-a11y-metadata">Include accessibility metadata in
 							distribution records</a> [[epub-a11y-tech-12]] for more information on including
 						accessibility metadata in other formats.</p>
 				</div>
@@ -380,7 +427,7 @@
 			<section id="sec-disc-linked-rec">
 				<h3>Linked metadata records</h3>
 
-				<p>Accessibility metadata can also be included in <a data-cite="epub/#sec-link-elem">linked records</a>
+				<p>Accessibility metadata can also be included in <a data-cite="epub-3#sec-link-elem">linked records</a>
 					[[epub-3]] (i.e., metadata records referenced from <code>link</code> elements), but the inclusion of
 					such metadata solely in a linked record does not satisfy the discoverability requirements of this
 					specification.</p>
@@ -394,13 +441,13 @@
 
 				<p>EPUB builds on the Open Web Platform, with HTML, CSS, JavaScript, and SVG the core technologies used
 					for content authoring. Leveraging these technologies allows the authoring of <a
-						data-cite="epub/#dfn-epub-publication">EPUB publications</a> with a high degree of accessibility
-					through the application of established web accessibility techniques, such as using native elements
-					and controls whenever possible and enhancing custom interactive content with [[wai-aria]] roles,
-					states, and properties. Plus, whenever possible, the EPUB community adds publishing accessibility
-					needs to these standards &#8212; for example, through the creation of the [[dpub-aria-1.1]] role
-					module. It is not necessary for anyone familiar with web accessibility to learn a new accessibility
-					framework to make EPUB publications accessible.</p>
+						data-cite="epub-3#dfn-epub-publication">EPUB publications</a> with a high degree of
+					accessibility through the application of established web accessibility techniques, such as using
+					native elements and controls whenever possible and enhancing custom interactive content with
+					[[wai-aria]] roles, states, and properties. Plus, whenever possible, the EPUB community adds
+					publishing accessibility needs to these standards &#8212; for example, through the creation of the
+					[[dpub-aria-1.1]] role module. It is not necessary for anyone familiar with web accessibility to
+					learn a new accessibility framework to make EPUB publications accessible.</p>
 
 				<p>The primary source for producing accessible web content is the W3C's Web Content Accessibility
 					Guidelines (WCAG) [[wcag2]], which establish benchmarks for accessible content. WCAG defines four
@@ -428,7 +475,7 @@
 				<p>This specification does not repeat the requirements or techniques introduced in those documents, as
 					it risks breaking compatibility between the two standards (e.g., putting guidance out of sync, or in
 					conflict). At the same time, although this specification does not call out those requirements, it
-					does not diminish their importance in creating <a data-cite="epub/#dfn-epub-publication">EPUB
+					does not diminish their importance in creating <a data-cite="epub-3#dfn-epub-publication">EPUB
 						publications</a> that are accessible.</p>
 
 				<p>This specification instead defines how to apply WCAG to an EPUB publication — which is a <a
@@ -456,7 +503,7 @@
 				<section id="sec-wcag-conf">
 					<h4>WCAG conformance requirements</h4>
 
-					<p>To conform to this specification, an <a data-cite="epub/#dfn-epub-publication">EPUB
+					<p>To conform to this specification, an <a data-cite="epub-3#dfn-epub-publication">EPUB
 							publication</a>:</p>
 
 					<ul class="conformance-list">
@@ -511,6 +558,12 @@
 						implement. When only meeting Level A conformance, accessibility is compromised for various user
 						groups, resulting in a less optimal reading experience.</p>
 
+					<p>Regional policies can also impose their own accessibility requirements. These requirements are
+						not always covered by WCAG (e.g., for language-specific considerations). In some cases, regions
+						could specify minimal conformance below Level A. If a publication reaches regional standards for
+						accessibility, but does not meet Level A requirements, it cannot claim conformance to this
+						standard.</p>
+
 					<div class="note">
 						<p>The <a href="https://www.w3.org/WAI/about/groups/agwg/">W3C Accessibility Guidelines Working
 								Group</a> is currently developing WCAG 3. As this version potentially represents a
@@ -528,7 +581,7 @@
 						<h5>Page and publication</h5>
 
 						<p>The WCAG <a data-cite="wcag2#wcag-2-layers-of-guidance">principles</a> [[wcag2]] focus on the
-							evaluation of individual web pages, but an <a data-cite="epub/#dfn-epub-publication">EPUB
+							evaluation of individual web pages, but an <a data-cite="epub-3#dfn-epub-publication">EPUB
 								publication</a> more closely resembles what WCAG refers to as a <a
 								data-cite="wcag2#dfn-set-of-web-pages">set of web pages</a>: "[a] collection of web
 							pages that share a common purpose" [[wcag2]].</p>
@@ -539,10 +592,10 @@
 							for content to be perceivable, operable, understandable, and robust.</p>
 
 						<p>For example, it is not sufficient to correctly order content within individual <a
-								data-cite="epub/#dfn-epub-content-document">EPUB content documents</a> if the <a
-								data-cite="epub/#dfn-epub-spine">spine</a> ordering of documents is incorrect. Likewise,
-							including a title for every EPUB content document is complementary to providing a title for
-							the publication: the overall accessibility decreases if either is missing.</p>
+								data-cite="epub-3#dfn-epub-content-document">EPUB content documents</a> if the <a
+								data-cite="epub-3#dfn-epub-spine">spine</a> ordering of documents is incorrect.
+							Likewise, including a title for every EPUB content document is complementary to providing a
+							title for the publication: the overall accessibility decreases if either is missing.</p>
 
 						<p>The EPUB Accessibility Techniques [[?epub-a11y-tech-12]] provide more information about
 							applying these guidelines to EPUB publications.</p>
@@ -551,7 +604,7 @@
 					<section id="sec-wcag-application">
 						<h5>Applying the conformance criteria</h5>
 
-						<p>When evaluating an <a data-cite="epub/#dfn-epub-publication">EPUB publication</a>, the WCAG
+						<p>When evaluating an <a data-cite="epub-3#dfn-epub-publication">EPUB publication</a>, the WCAG
 								<a data-cite="wcag2#conformance-reqs">conformance criteria</a> [[wcag2]] are applied as
 							follows:</p>
 
@@ -559,20 +612,20 @@
 							<li>When determining compliance with a conformance level, the whole EPUB publication MUST
 								meet the conformance requirements of the level claimed.</li>
 
-							<li><a data-cite="epub/#dfn-epub-publication">EPUB publications</a> MUST NOT use EPUB's
+							<li><a data-cite="epub-3#dfn-epub-publication">EPUB publications</a> MUST NOT use EPUB's
 								fallback mechanisms to provide a <a data-cite="wcag2#dfn-conforming-alternate-versions"
 									>conforming alternate version</a> [[wcag2]], as there is no reliable way for users
 								to access such fallbacks. If an EPUB publication uses fallbacks, both the primary
 								content and its fallback(s) MUST meet the requirements for the conformance level
 								claimed. EPUB-specific fallback mechanisms include <a
-									data-cite="epub/#sec-manifest-fallbacks">manifest fallbacks</a> [[epub-3]], <a
-									data-cite="epub/#sec-opf-bindings">bindings</a> [[epub-3]] and content switching via
-								the <a data-cite="epub/#sec-xhtml-content-switch"><code>epub:switch</code> element</a>
-								[[epub-3]].</li>
+									data-cite="epub-3#sec-manifest-fallbacks">manifest fallbacks</a> [[epub-3]], <a
+									data-cite="epub-3#sec-opf-bindings">bindings</a> [[epub-3]] and content switching
+								via the <a data-cite="epub-3#sec-xhtml-content-switch"><code>epub:switch</code>
+									element</a> [[epub-3]].</li>
 
-							<li>The "<a data-cite="wcag2#cc2">Full Pages</a>" requirement [WCAG2] -- that parts of a
+							<li>The "<a data-cite="wcag2#cc2">Full Pages</a>" requirement [[wcag2]] -- that parts of a
 								page cannot be excluded when making a conformance claim -- applies to every <a
-									data-cite="epub/#dfn-epub-content-document">EPUB content document</a> in the EPUB
+									data-cite="epub-3#dfn-epub-content-document">EPUB content document</a> in the EPUB
 								publication (i.e., they all have to conform in full to the conformance level
 								claimed).</li>
 						</ul>
@@ -603,10 +656,10 @@
 
 						<p>Providing page navigation also helps in reflowable publications that do not have a statically
 							paginated equivalent. The default pagination of these publications by <a
-								data-cite="epub/#dfn-epub-reading-system">reading systems</a> is not static since it
-							changes depending on the <a data-cite="epub/#dfn-viewport">viewport</a> size and user's font
-							settings. As a result, coordinating locations among users of the same <a
-								data-cite="epub/#dfn-epub-publication">EPUB publication</a> can be complicated without
+								data-cite="epub-3#dfn-epub-reading-system">reading systems</a> is not static since it
+							changes depending on the <a data-cite="epub-3#dfn-viewport">viewport</a> size and user's
+							font settings. As a result, coordinating locations among users of the same <a
+								data-cite="epub-3#dfn-epub-publication">EPUB publication</a> can be complicated without
 							static references.</p>
 
 						<p>The inclusion of page navigation represents one method of achieving the <a
@@ -628,7 +681,7 @@
 					<section id="sec-page-nav-applicability">
 						<h5>Applicability</h5>
 
-						<p>An <a data-cite="epub/#dfn-epub-publication">EPUB publication</a> SHOULD include page
+						<p>An <a data-cite="epub-3#dfn-epub-publication">EPUB publication</a> SHOULD include page
 							navigation whenever any of the following cases is true:</p>
 
 						<ul>
@@ -636,7 +689,7 @@
 								publication (e.g., included in a print/digital bundle);</li>
 
 							<li>the EPUB publication is offered as an alternative to a statically paginated publication
-								in an environment where it it reasonable to expect the use of both versions (e.g.,
+								in an environment where it is reasonable to expect the use of both versions (e.g.,
 								educational settings); or</li>
 
 							<li>the EPUB publication is produced from the same workflow as a statically paginated
@@ -644,8 +697,7 @@
 								formats.</li>
 						</ul>
 
-						<p>Reflowable EPUB publications without statically paginated equivalents MAY include page
-							navigation.</p>
+						<p>EPUB publications without statically paginated equivalents MAY include page navigation.</p>
 
 						<p>Only when an EPUB publication includes page navigation do the objectives defined in this
 							section apply to it.</p>
@@ -654,114 +706,79 @@
 					<section id="sec-page-nav-obj">
 						<h5>Objectives</h5>
 
-						<section id="sec-page-src">
+						<section id="page-source">
 							<h6>Pagination source</h6>
 
+							<div class="info">
+								<a data-cite="epub-a11y-understand#page-source">Understanding pagination source</a>
+								<a data-cite="epub-a11y-tech-12#page-source">Techniques for pagination source</a>
+							</div>
+
 							<dl>
-								<dt id="sec-page-src-obj">Objective</dt>
+								<dt id="page-source-obj">Objective</dt>
 								<dd>
 									<p>Identify the source of static page break locations.</p>
 								</dd>
 
-								<dt id="sec-page-src-understand">Understanding this Objective</dt>
+								<dt id="page-source-conf">Meeting this Objective</dt>
 								<dd>
-									<p>Users need to know the source of the pagination in an <a
-											data-cite="epub/#dfn-epub-publication">EPUB publication</a> to determine
-										whether it will be useful for their needs. Print publications, for example,
-										produced in both hard and soft cover editions will have different pagination.
-										Different editions of the same book often also have different pagination.</p>
-									<p>Including a recognizable identifier for the statically paginated source, such as
-										its ISBN or ISSN, ensures that users can determine which version the pagination
-										corresponds to.</p>
-								</dd>
-
-								<dt id="sec-page-src-conf">Meeting this Objective</dt>
-
-								<dd>
-									<p>When an EPUB publication includes <a href="#sec-page-breaks">page break
-											markers</a> and/or a <a href="#sec-page-list">page list</a> that correspond
-										to a statically-paginated version of the publication, the publication MUST
-										identify that source in the <a data-cite="epub/#dfn-package-document">package
+									<p>When an EPUB publication includes <a href="#page-breaks">page break markers</a>
+										and/or a <a href="#page-list">page list</a> that correspond to a
+										statically-paginated version of the publication, the publication MUST identify
+										that source in the <a data-cite="epub-3#dfn-package-document">package
 											document</a> metadata.</p>
 									<p>If, however, these features are added to a digital-only <a
-											data-cite="epub/#dfn-epub-publication">EPUB publication</a>, the publication
-										MUST NOT specify a source (i.e., do not identify the current publication as the
-										source of its own pagination).</p>
-									<div class="note">
-										<p>Refer to <a data-cite="epub-a11y-tech-12#pageSource">Identifying the
-												pagination source</a> [[epub-a11y-tech-12]] for more information on
-											meeting this objective.</p>
-									</div>
+											data-cite="epub-3#dfn-epub-publication">EPUB publication</a>, the
+										publication MUST NOT specify a source (i.e., do not identify the current
+										publication as the source of its own pagination).</p>
 								</dd>
 							</dl>
 						</section>
 
-						<section id="sec-page-list">
+						<section id="page-list">
 							<h6>Page list</h6>
 
+							<div class="info">
+								<a data-cite="epub-a11y-understand#page-list">Understanding page list</a>
+								<a data-cite="epub-a11y-tech-12#page-list">Techniques for page list</a>
+							</div>
+
 							<dl>
-								<dt id="sec-page-list-obj">Objective</dt>
+								<dt id="page-list-obj">Objective</dt>
 								<dd>
 									<p>Provide navigation to static page break locations.</p>
 								</dd>
 
-								<dt id="sec-page-list-understand">Understanding this Objective</dt>
-								<dd>
-									<p>The page list is the primary means of navigating to page break locations as it
-										provides a list of links to each of the static page break locations in the <a
-											data-cite="epub/#dfn-epub-publication">EPUB publication</a>.</p>
-									<p><a data-cite="epub/#dfn-epub-reading-system">Reading systems</a> typically use
-										this list to generate a "go to page" interface in which users can plug in the
-										page number that they wish to move to, but sometimes offer users the ability to
-										access the full list and select the page number to go to.</p>
-									<p>Without a page list, page navigation becomes extremely difficult as it would rely
-										on navigating the individual <a href="#sec-page-breaks">page break markers</a>
-										(if they are even present).</p>
-								</dd>
-
-								<dt id="sec-page-list-conf">Meeting this Objective</dt>
+								<dt id="page-list-conf">Meeting this Objective</dt>
 								<dd>
 									<p>An EPUB publication MUST include a page list.</p>
 									<p>The page list SHOULD include links to all pages of content reproduced from the
 										source (i.e., it does not have to include links for blank pages or content not
 										reproduced in the digital edition).</p>
-									<p>The page list MUST include links to all the <a href="#sec-page-breaks-obj">page
-											break markers</a> in the content.</p>
+									<p>The page list MUST include links to all the <a href="#page-breaks-obj">page break
+											markers</a> in the content.</p>
 									<p>It is encouraged to include links to all pages in the source in the page list,
 										whether they are reproduced or not, but this is not a conformance
 										requirement.</p>
-									<div class="note">
-										<p>Refer to <a data-cite="epub-a11y-tech-12#pageList">Provide a page list</a>
-											[[epub-a11y-tech-12]] for more information on meeting this objective.</p>
-									</div>
 								</dd>
 							</dl>
 						</section>
 
-						<section id="sec-page-breaks">
+						<section id="page-breaks">
 							<h6>Page breaks</h6>
 
+							<div class="info">
+								<a data-cite="epub-a11y-understand#page-breaks">Understanding page breaks</a>
+								<a data-cite="epub-a11y-tech-12#page-breaks">Techniques for page breaks</a>
+							</div>
+
 							<dl>
-								<dt id="sec-page-breaks-obj">Objective</dt>
+								<dt id="page-breaks-obj">Objective</dt>
 								<dd>
 									<p>Provide static page break locations.</p>
 								</dd>
 
-								<dt id="sec-page-breaks-understand">Understanding this Objective</dt>
-								<dd>
-									<p>Inserting page break markers into an <a data-cite="epub/#dfn-epub-publication"
-											>EPUB publication</a> provides users with context about where they are in
-										the text. <a>Assistive technologies</a> can use this information to announce the
-										current page number the user is on, for example, if the user wants to cite
-										something on the page.</p>
-									<p>The inclusion of page break markers can also allow users to move quickly forwards
-										and backwards by page without having to access the page list each time.</p>
-									<p>The inclusion of these markers also simplifies the creation of a <a
-											href="#sec-page-list">page list</a>, as they provide easily referenced
-										destinations for the links.</p>
-								</dd>
-
-								<dt id="sec-page-break-conf">Meeting this Objective</dt>
+								<dt id="page-break-conf">Meeting this Objective</dt>
 								<dd>
 									<p>Inclusion of page break markers in an EPUB publication is OPTIONAL.</p>
 									<p>If an EPUB publication includes page break markers, the page break markers SHOULD
@@ -770,15 +787,10 @@
 									<p>It is encouraged to include page break markers for all the pages in the source,
 										whether reproduced or not, but this is not a requirement.</p>
 									<p>In addition, if page numbers are read aloud in a synchronized text-audio playback
-										of the content (e.g., EPUB 3 media overlays [[?epub]]), the page break markers
+										of the content (e.g., EPUB 3 media overlays [[?epub-3]]), the page break markers
 										MUST be identified in the playback instructions (e.g., using the <a
-											data-cite="epub/#sec-epub-type-attribute"><code>epub:type</code>
-											attribute</a> [[?epub]] in media overlays SMIL files).</p>
-									<div class="note">
-										<p>Refer to <a data-cite="epub-a11y-tech-12#pageBreakMarkers">Provide page break
-												markers</a> [[epub-a11y-tech-12]] for more information on meeting this
-											objective.</p>
-									</div>
+											data-cite="?epub-3/#sec-epub-type-attribute"><code>epub:type</code>
+											attribute</a> [[?epub-3]] in media overlays SMIL files).</p>
 								</dd>
 							</dl>
 						</section>
@@ -793,7 +805,7 @@
 
 						<p>The provision of synchronized text-audio playback helps address various user needs. It not
 							only enables a seamless visual and auditory reading experience from beginning to end of an
-								<a data-cite="epub/#dfn-epub-publication">EPUB publication</a>, but is useful to users
+								<a data-cite="epub-3#dfn-epub-publication">EPUB publication</a>, but is useful to users
 							who only require audio playback (e.g., who cannot see the text or are prevented from reading
 							visually due to motion-sickness) or who only benefit from reading with text highlighting
 							(e.g., readers with dyslexia).</p>
@@ -804,7 +816,7 @@
 							ways to control which parts of the content are read aloud.</p>
 
 						<p>In order to offer users greater control over content presentation, EPUB publications need to
-							include structure and semantics so that the <a data-cite="epub/#dfn-epub-reading-system"
+							include structure and semantics so that the <a data-cite="epub-3#dfn-epub-reading-system"
 								>reading system</a> has the necessary context to enable this type of user experience.
 							With greater context, a reading system can provide the ability to skip past secondary
 							content that interferes with the primary narrative and escape users from deeply nested
@@ -819,7 +831,7 @@
 					<section id="sec-sync-applicability">
 						<h5>Applicability</h5>
 
-						<p><a data-cite="epub/#dfn-epub-publication">EPUB publications</a> with synchronized text-audio
+						<p><a data-cite="epub-3#dfn-epub-publication">EPUB publications</a> with synchronized text-audio
 							playback MUST conform to all requirements in [[epub-3]]. It is not necessary to meet any
 							additional requirements beyond those defined in [[epub-3]] to be conformant with this
 							specification.</p>
@@ -838,217 +850,125 @@
 					<section id="sec-sync-obj">
 						<h5>Objectives</h5>
 
-						<section id="sec-sync-complete">
+						<section id="sync-completeness">
 							<h6>Completeness</h6>
 
+							<div class="info">
+								<a data-cite="epub-a11y-understand#sync-completeness">Understanding completeness</a>
+								<a data-cite="epub-a11y-tech-12#sync-completeness">Techniques for completeness</a>
+							</div>
+
 							<dl>
-								<dt id="sec-mo-comlete-obj">Objective</dt>
+								<dt id="sync-completeness-obj">Objective</dt>
 								<dd>
 									<p>Ensure that all text content is available in audio.</p>
 								</dd>
 
-								<dt id="sec-mo-complete-understand">Understanding this Objective</dt>
+								<dt id="sync-completeness-conf">Meeting this Objective</dt>
 								<dd>
-									<p>Although it is possible for users who require a publication in audio form to use
-										text-to-speech playback, the experience is considerably poorer than when
-										pre-recorded narration is provided. Text-to-speech engines have limited built-in
-										vocabularies, causing them to mangle and mispronounce most uncommon words they
-										encounter. As a result users have to have words repeated and spelled out to make
-										sense of the content, slowing down their reading and reducing comprehension.</p>
-									<p>For this reason, it is important to provide narration for the full text of a
-										publication in addition to the full text. Users can then decide which reading
-										modality they prefer &#8212; text, audio, or a mix of the two.</p>
-								</dd>
-
-								<dt id="sec-mo-complete-conf">Meeting this Objective</dt>
-								<dd>
-									<p><a data-cite="epub/#dfn-epub-publication">EPUB publications</a> MUST include
+									<p><a data-cite="epub-3#dfn-epub-publication">EPUB publications</a> MUST include
 										synchronized audio playback for all visible textual content as well as all
 										textual alternatives for visual media.</p>
-									<div class="note">
-										<p>Refer to <a data-cite="epub-a11y-tech-12#sync-coverage">Ensuring complete
-												text coverage</a> [[epub-a11y-tech-12]] for more information on meeting
-											this objective.</p>
-									</div>
 								</dd>
 							</dl>
 						</section>
 
-						<section id="sec-sync-order">
+						<section id="sync-reading-order">
 							<h6>Reading order</h6>
 
+							<div class="info">
+								<a data-cite="epub-a11y-understand#sync-reading-order">Understanding reading order</a>
+								<a data-cite="epub-a11y-tech-12#sync-reading-order">Techniques for reading order</a>
+							</div>
+
 							<dl>
-								<dt id="sec-mo-order-obj">Objective</dt>
+								<dt id="sync-reading-order-obj">Objective</dt>
 								<dd>
 									<p>Ensure synchronized text-audio playback matches logical reading order.</p>
 								</dd>
 
-								<dt id="sec-mo-order-understand">Understanding this Objective</dt>
-								<dd>
-									<p>Every <a data-cite="epub/#dfn-epub-publication">EPUB publication</a> has a
-										default reading order that allows users to progress through the content. The
-										default reading order consists of two parts: the order of references in the
-										spine provides a high-level progression through the <a
-											data-cite="epub/#dfn-epub-content-document">EPUB content documents</a> that
-										make up the publication, while the markup within each EPUB content document
-										provides the default progression through the content elements (i.e., as
-										represented in the document object model [[dom]]).</p>
-									<p>For many languages, the default reading order also matches the logical reading
-										order &#8212; the way that users will naturally follow the narrative. It ensures
-										that readers can follow the primary narrative and that they encounter secondary
-										content where the author intended it to be read. The default reading order also
-										establishes some less obvious relations, like the progress within a table from
-										cell to cell and row to row.</p>
-									<p>If the sequence of the synchronized text-audio playback does not match this
-										progression, it can cause confusion for readers, whether they are only listening
-										to the audio or trying to also follow visually.</p>
-									<p>Ordering the playback to match the default reading order is the safest way to
-										ensure that users can follow the text. In some cases, however, strict adherence
-										to this practice can result in a suboptimal reading experience (e.g., playback
-										of a table by column instead of row might make more natural sense in some
-										cases). These publications have a logical reading order that cannot match the
-										default order of the elements of the host format.</p>
-									<p>The goal of this objective is not to forbid alternate presentations, but to
-										ensure that deviations are only made to better represent the logical reading
-										order of the content.</p>
-								</dd>
-
-								<dt id="sec-sync-order-conf">Meeting this Objective</dt>
+								<dt id="sync-reading-order-conf">Meeting this Objective</dt>
 								<dd>
 									<p>The order of the synchronized text-audio playback instructions SHOULD reflect
 										both:</p>
 									<ul>
 										<li>the order of the referenced EPUB content documents in the <a
-												data-cite="epub/#dfn-epub-spine">spine</a>; and</li>
+												data-cite="epub-3#dfn-epub-spine">spine</a>; and</li>
 										<li>the order of each element within its respective EPUB content document.</li>
 									</ul>
 									<p>If an EPUB publication uses a different ordering, that ordering MUST still result
 										in a logical playback of the content.</p>
-									<div class="note">
-										<p>Refer to <a data-cite="epub-a11y-tech-12#sync-reading-order">Specifying the
-												reading order</a> [[epub-a11y-tech-12]] for more information on meeting
-											this objective.</p>
-									</div>
 								</dd>
 							</dl>
 						</section>
 
-						<section id="sec-sync-skippability">
+						<section id="sync-skippability">
 							<h6>Skippability</h6>
 
+							<div class="info">
+								<a data-cite="epub-a11y-understand#sync-skippability">Understanding skippability</a>
+								<a data-cite="epub-a11y-tech-12#sync-skippability">Techniques for skippability</a>
+							</div>
+
 							<dl>
-								<dt id="sec-sync-skippability-obj">Objective</dt>
+								<dt id="sync-skippability-obj">Objective</dt>
 								<dd>
 									<p>Enable users to automatically skip over content.</p>
 								</dd>
 
-								<dt id="sec-sync-skippability-understand">Understanding this Objective</dt>
-								<dd>
-									<p>Being able to read the primary narrative of a work without interruption is
-										central to reading comprehension. <a data-cite="epub/#dfn-epub-publication">EPUB
-											publications</a> are typically structured to visually represent secondary
-										information such as page break markers and footnotes outside the main narrative
-										flow (e.g., by using different background colors or placement so readers can
-										filter this information visually out while reading).</p>
-									<p>Readers who prefer auditory playback, however, cannot skip this information with
-										the same ease in a linear audio-based reading experience. And, without
-										structural semantics, synchronized text-audio playback cannot offer skipping
-										content either.</p>
-									<p>When the synchronized text-audio playback instructions include structural
-										semantics, however, <a data-cite="epub/#dfn-epub-reading-system">reading
-											systems</a> can create reading experiences that allow users to decide which
-										secondary content to skip by default.</p>
-								</dd>
-
-								<dt id="sec-sync-skippability-conf">Meeting this Objective</dt>
+								<dt id="sync-skippability-conf">Meeting this Objective</dt>
 								<dd>
 									<p>Synchronized text-audio playback instructions SHOULD identify all skippable
 										structures.</p>
-									<div class="note">
-										<p>Refer to <a data-cite="epub-a11y-tech-12#sync-skippability">Identifying
-												skippable structures</a> [[epub-a11y-tech-12]] for more information on
-											meeting this objective.</p>
-									</div>
 								</dd>
 							</dl>
 						</section>
 
-						<section id="sec-sync-escapability">
+						<section id="sync-escapability">
 							<h6>Escapability</h6>
 
+							<div class="info">
+								<a data-cite="epub-a11y-understand#sync-escapability">Understanding escapability</a>
+								<a data-cite="epub-a11y-tech-12#sync-escapability">Techniques for escapability</a>
+							</div>
+
 							<dl>
-								<dt id="sec-sync-escapability-obj">Objective</dt>
+								<dt id="sync-escapability-obj">Objective</dt>
 								<dd>
 									<p>Enable users to automatically escape from structured content.</p>
 								</dd>
 
-								<dt id="sec-sync-escapability-understand">Understanding this Objective</dt>
-								<dd>
-									<p>When reading visually, users can quickly move through, and escape from, highly
-										structured content such as sidebars, lists, and figures. Visual readers can skim
-										lists and quickly return to the primary narrative once they locate the desired
-										information, for example. The same is true for reading figures and sidebars, as
-										they are visually offset from the primary narrative so easily jumped into and
-										out of.</p>
-									<p>The same ease of escaping from content is only possible if <a
-											data-cite="epub/#dfn-epub-publication">EPUB publications</a> include
-										structural semantics in the synchronized text/audio format. Users might not be
-										able to escape from lists, sidebars, figures, and other highly structured
-										content, without the structural semantics of those elements being available.</p>
-									<p>When the synchronized text-audio playback instructions include this information,
-											<a data-cite="epub/#dfn-epub-reading-system">reading systems</a> can
-										simplify playback for auditory readers to enable a comparable reading
-										experience.</p>
-								</dd>
-
-								<dt id="sec-sync-escapability-conf">Meeting this Objective</dt>
+								<dt id="sync-escapability-conf">Meeting this Objective</dt>
 								<dd>
 									<p>Synchronized text-audio playback instructions SHOULD identify all escapable
 										structures.</p>
-									<div class="note">
-										<p>Refer to <a data-cite="epub-a11y-tech-12#sync-escapability">Identifying
-												escapable structures</a> [[epub-a11y-tech-12]] for more information on
-											meeting this objective.</p>
-									</div>
 								</dd>
 							</dl>
 						</section>
 
-						<section id="sec-sync-navdoc">
+						<section id="sync-nav-doc">
 							<h6>Navigation document</h6>
 
+							<div class="info">
+								<a data-cite="epub-a11y-understand#sync-nav-doc">Understanding navigation document</a>
+								<a data-cite="epub-a11y-tech-12#sync-nav-doc">Techniques for navigation document</a>
+							</div>
+
 							<dl>
-								<dt id="sec-sync-navdoc-obj">Objective</dt>
+								<dt id="sync-nav-doc-obj">Objective</dt>
 								<dd>
 									<p>Ensure auditory playback is possible for the navigation aids in the <a
-											data-cite="epub/#dfn-epub-navigation-document">EPUB navigation document</a>
-										when presented by <a data-cite="epub/#dfn-epub-reading-system">reading
+											data-cite="epub-3#dfn-epub-navigation-document">EPUB navigation document</a>
+										when presented by <a data-cite="epub-3#dfn-epub-reading-system">reading
 											systems</a>.</p>
 								</dd>
 
-								<dt id="sec-sync-navdoc-understand">Understanding this Objective</dt>
+								<dt id="sync-nav-doc-conf">Meeting this Objective</dt>
 								<dd>
-									<p>Reading systems typically provide their own interfaces to the navigation aids in
-										the EPUB navigation document. For example, they open the table of contents as a
-										specialized interface on top of the content the user is reading.</p>
-									<p>To access these interfaces, users typically rely on text-to-speech playback, when
-										available, to hear the entries.</p>
-									<p>Providing synchronized text-audio playback for the EPUB navigation document
-										provides reading systems the ability to use auditory labels for the links,
-										improving the experience for auditory readers.</p>
-								</dd>
-
-								<dt id="sec-sync-navdoc-conf">Meeting this Objective</dt>
-								<dd>
-									<p><a data-cite="epub/#dfn-epub-publication">EPUB publications</a> SHOULD include
+									<p><a data-cite="epub-3#dfn-epub-publication">EPUB publications</a> SHOULD include
 										synchronized text-audio playback for the <a
 											href="https://www.w3.org/TR/epub/#sec-mo-nav-doc">EPUB navigation
 											document</a> [[epub-3]].</p>
-									<div class="note">
-										<p>Refer to <a data-cite="epub-a11y-tech-12#sync-nav">Synchronizing the
-												navigation document</a> [[epub-a11y-tech-12]] for more information on
-											meeting this objective.</p>
-									</div>
 								</dd>
 							</dl>
 						</section>
@@ -1062,9 +982,9 @@
 				<section id="sec-conf-reporting-intro" class="informative">
 					<h4>Introduction</h4>
 
-					<p>Evaluators report the accessibility conformance of an <a data-cite="epub/#dfn-epub-publication"
+					<p>Evaluators report the accessibility conformance of an <a data-cite="epub-3#dfn-epub-publication"
 							>EPUB publication</a> through the expression of metadata properties in the <a
-							data-cite="epub/#dfn-package-document">package document</a>.</p>
+							data-cite="epub-3#dfn-package-document">package document</a>.</p>
 
 					<p>This metadata establishes both:</p>
 
@@ -1104,32 +1024,21 @@
 					<h4>Publication conformance</h4>
 
 					<p>To indicate conformance to the accessibility requirements of this specification, an <a
-							data-cite="epub/#dfn-epub-publication">EPUB publication</a> [[epub-3]] MUST specify in its
-							<a data-cite="epub/#sec-pkg-metadata">metadata section</a> a <a
-							href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/conformsTo"
-								><code id="dcterms-conformsTo">conformsTo</code> property</a> [[dcterms]] whose value,
-						after <a data-cite="xml#AVNormalize">whitespace normalization</a> [[xml]], exactly matches
-						(i.e., both in case and spacing) the following pattern:</p>
+							data-cite="epub-3#dfn-epub-publication">EPUB publication</a> [[epub-3]] MUST specify in its
+							<a data-cite="epub-3#sec-pkg-metadata">metadata section</a> a <a
+							href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#conformsTo"><code
+								id="dcterms-conformsTo">conformsTo</code> property</a> [[dcterms]] whose value, after <a
+							data-cite="xml#AVNormalize">whitespace normalization</a> [[xml]], exactly matches (i.e.,
+						both in case and spacing) the following pattern:</p>
 
-					<p class="conf-pattern">EPUB Accessibility <a href="#acc-ver"><var>A11Y-VER</var></a> - WCAG <a
-							href="#wcag-ver"><var>WCAG-VER</var></a> Level <a href="#wcag-lvl"
-						><var>WCAG-LVL</var></a></p>
+					<p class="conf-pattern">EPUB Accessibility 1.2 - WCAG <a href="#wcag-ver"><var>WCAG-VER</var></a>
+						Level <a href="#wcag-lvl"><var>WCAG-LVL</var></a></p>
 
 					<p>
 						<i>where:</i>
 					</p>
 
 					<dl class="varlist">
-						<dt id="acc-ver">
-							<var>A11Y-VER</var>
-						</dt>
-						<dd>
-							<p>Specifies the version number of the EPUB Accessibility specification the publication
-								conforms to. The value MUST NOT be lower than <code>1.1</code> as the 1.0 version of
-								this specification used a different conformance identification scheme.</p>
-							<p>The value MUST be <code>1.2</code> to indicate conformance to this version of the
-								specification.</p>
-						</dd>
 						<dt id="wcag-ver">
 							<var>WCAG-VER</var>
 						</dt>
@@ -1164,36 +1073,26 @@
 &lt;/package></pre>
 					</aside>
 
-					<p>The following conformance strings are valid as of publication of this specification:</p>
+					<p id="conf-strings">The following strings are valid for identifying conformance to this
+						specification</p>
 
 					<ul>
-						<li>EPUB Accessibility 1.1 - WCAG 2.0 Level A</li>
-						<li>EPUB Accessibility 1.1 - WCAG 2.0 Level AA</li>
-						<li>EPUB Accessibility 1.1 - WCAG 2.0 Level AAA</li>
-						<li>EPUB Accessibility 1.1 - WCAG 2.1 Level A</li>
-						<li>EPUB Accessibility 1.1 - WCAG 2.1 Level AA</li>
-						<li>EPUB Accessibility 1.1 - WCAG 2.1 Level AAA</li>
-						<li>EPUB Accessibility 1.1 - WCAG 2.2 Level A</li>
-						<li>EPUB Accessibility 1.1 - WCAG 2.2 Level AA</li>
-						<li>EPUB Accessibility 1.1 - WCAG 2.2 Level AAA</li>
-						<li>EPUB Accessibility 1.2 - WCAG 2.0 Level A</li>
-						<li>EPUB Accessibility 1.2 - WCAG 2.0 Level AA</li>
-						<li>EPUB Accessibility 1.2 - WCAG 2.0 Level AAA</li>
-						<li>EPUB Accessibility 1.2 - WCAG 2.1 Level A</li>
-						<li>EPUB Accessibility 1.2 - WCAG 2.1 Level AA</li>
-						<li>EPUB Accessibility 1.2 - WCAG 2.1 Level AAA</li>
 						<li>EPUB Accessibility 1.2 - WCAG 2.2 Level A</li>
 						<li>EPUB Accessibility 1.2 - WCAG 2.2 Level AA</li>
 						<li>EPUB Accessibility 1.2 - WCAG 2.2 Level AAA</li>
+						<li>EPUB Accessibility 1.2 - WCAG 2.1 Level A</li>
+						<li>EPUB Accessibility 1.2 - WCAG 2.1 Level AA</li>
+						<li>EPUB Accessibility 1.2 - WCAG 2.1 Level AAA</li>
+						<li>EPUB Accessibility 1.2 - WCAG 2.0 Level A</li>
+						<li>EPUB Accessibility 1.2 - WCAG 2.0 Level AA</li>
+						<li>EPUB Accessibility 1.2 - WCAG 2.0 Level AAA</li>
 					</ul>
 
 					<div class="note">
-						<p>The list of valid conformance strings will increase as W3C releases new versions of WCAG.</p>
-
-						<p>In addition, <a href="https://www.w3.org/TR/wcag-3.0/">WCAG 3.0</a> is set to introduce new
-							level names (currently Bronze, Silver and Gold). Those names will likely replace A, AA, and
-							AAA in the string pattern, but conformance will be addressed after that specification
-							becomes a <a href="https://www.w3.org/policies/process/#RecsW3C">W3C Recommendation</a>.</p>
+						<p><a href="https://www.w3.org/TR/wcag-3.0/">WCAG 3.0</a> is set to introduce new level names
+							(currently Bronze, Silver and Gold). Those names will likely replace A, AA, and AAA in the
+							string pattern, but conformance will be addressed after that specification becomes a <a
+								href="https://www.w3.org/policies/process/#RecsW3C">W3C Recommendation</a>.</p>
 					</div>
 
 					<section class="informative">
@@ -1231,13 +1130,118 @@
 				<section id="sec-conf-reporting-eval">
 					<h4>Evaluator information</h4>
 
+					<section id="sec-conf-num-express" class="informative">
+						<h5>Differences in expression based on the number of claims</h5>
+
+						<p>How to add the evaluator information to an EPUB publication depends on the number of
+							conformance claims that are made.</p>
+
+						<p>Most publications will only contain a single <code>dcterms:conformsTo</code> [[dcterms]]
+							property with the <a href="#sec-conf-reporting-pub">accessibility claim</a> for the content.
+							In this case, it is not necessary to use EPUB 3's <a data-cite="epub/#subexpression"
+								>metadata association mechanism</a> [[epub-3]] to connect the various metadata
+							statements.</p>
+
+						<p>Consider the following example metadata:</p>
+
+						<pre>&lt;metadata …>
+   …
+   &lt;meta
+       property="dcterms:conformsTo"
+       id="conf">
+      EPUB Accessibility 1.2 - WCAG 2.2 Level AA
+   &lt;/meta>
+   &lt;meta
+       property="a11y:certifiedBy">
+      Foo's Accessibility Testing
+   &lt;/meta>
+   &lt;meta
+       property="a11y:certifierCredential">
+      A+ Accessibility Rating
+   &lt;/meta>
+   &lt;meta
+       property="dcterms:date">
+      2021-09-07
+   &lt;/meta>
+   &lt;link
+       rel="a11y:certifierReport"
+       href="reports/a11y.xhtml"/>
+   …
+&lt;/metadata></pre>
+
+						<p>Since there is only one conformance claim, it can be implied that the additional evaluation
+							information is all related to it.</p>
+
+						<div class="note">
+							<p>If it is preferred to have the metadata connections explicit, as will be described next,
+								it is still allowed even when there is only one claim.</p>
+						</div>
+
+						<p>The use of the <a data-cite="epub-3#attrdef-refines"><code>refines</code> attribute</a>
+							[[epub-3]] only becomes a necessity when there is <a href="#other-conformance-claims">more
+								than one <code>dcterms:conformsTo</code> statement</a>. Without chaining the metadata
+							statements together, the information stops being easily machine-processable, which can lead
+							to errors in its presentation to users.</p>
+
+						<p>The following example shows the same metadata as the previous example but this time it is all
+							connected through uses of the <code>refines</code> attribute because the publisher has added
+							a conformance claim to their own internal standard.</p>
+
+						<pre>&lt;metadata …>
+   …
+   &lt;meta
+       property="dcterms:conformsTo"
+       id="internal">
+      Acme Publishing's EPUB Standards
+   &lt;/meta>
+   …
+   &lt;meta
+       property="dcterms:conformsTo"
+       id="conf">
+      EPUB Accessibility 1.2 - WCAG 2.2 Level AA
+   &lt;/meta>
+   &lt;meta
+       id="certifier"
+       property="a11y:certifiedBy"
+       refines="#conf">
+      Foo's Accessibility Testing
+   &lt;/meta>
+   &lt;meta
+       property="a11y:certifierCredential"
+       refines="#certifier">
+      A+ Accessibility Rating
+   &lt;/meta>
+   &lt;meta
+       property="dcterms:date"
+       refines="#certifier">
+      2021-09-07
+   &lt;/meta>
+   &lt;link
+       rel="a11y:certifierReport"
+       refines="#certifier"
+       href="reports/a11y.xhtml"/>
+   …
+&lt;/metadata></pre>
+
+						<p>The <code>refines</code> attribute now allows the path back to the EPUB Accessibility
+							standard conformance claim to be established, thereby linking all the evaluator information
+							to it.</p>
+
+						<p>The following sections explain the purpose of the evaluator metadata in greater detail as
+							well as how to use the <code>refines</code> attribute when it is needed.</p>
+					</section>
+
 					<section id="sec-evaluator-name">
 						<h5>Evaluator name</h5>
 
-						<p>The <a data-cite="epub/#dfn-package-document">package document</a> metadata MUST include an
+						<p>The <a data-cite="epub-3#dfn-package-document">package document</a> metadata MUST include an
 								<a href="#certifiedBy"><code id="a11y-certifiedBy">a11y:certifiedBy</code></a> property
 							that specifies the name of the party that evaluated the <a
-								data-cite="epub/#dfn-epub-publication">EPUB publication</a>.</p>
+								data-cite="epub-3#dfn-epub-publication">EPUB publication</a>.</p>
+
+						<p>If <a href="#sec-conf-num-express">more than one conformance claim</a> is made, <a
+								data-cite="epub/#subexpression">associate</a> [[epub-3]] the evaluator with their <a
+								href="#sec-conf-reporting-pub">claim</a>.</p>
 
 						<div class="note">
 							<p>If an organization evaluates an EPUB publication, users will typically want to know the
@@ -1246,22 +1250,33 @@
 								this can diminish the trust users have in the claim.</p>
 						</div>
 
-						<aside class="example" title="Evaluator's name metadata">
-							<p>The evaluator's name is linked to the conformance statement using the
-									<code>refines</code> attribute.</p>
+						<aside class="example" title="Adding the evaluator">
 							<pre>&lt;metadata …>
-  …
-  &lt;meta
-      property="dcterms:conformsTo"
-      id="conf">
-     EPUB Accessibility 1.2 - WCAG 2.2 Level AA
-  &lt;/meta>
-  &lt;meta
-      property="a11y:certifiedBy"
-      refines="#conf">
-     Foo's Accessibility Testing
-  &lt;/meta>
-  …
+   …
+   &lt;meta
+       property="a11y:certifiedBy">
+      Foo's Accessibility Testing
+   &lt;/meta>
+   …
+&lt;/metadata></pre>
+						</aside>
+
+						<aside class="example" title="Adding the evaluator when there is more than one claim">
+							<p>The evaluator is linked to the conformance statement using the <code>refines</code>
+								attribute.</p>
+							<pre>&lt;metadata …>
+   …
+   &lt;meta
+       property="dcterms:conformsTo"
+       id="conf">
+      EPUB Accessibility 1.2 - WCAG 2.2 Level AA
+   &lt;/meta>
+   &lt;meta
+       property="a11y:certifiedBy"
+       refines="#conf">
+      Foo's Accessibility Testing
+   &lt;/meta>
+   …
 &lt;/metadata></pre>
 						</aside>
 					</section>
@@ -1270,16 +1285,31 @@
 						<h5>Evaluation date</h5>
 
 						<p>If the date the evaluation was performed on is known, include that information in a <a
-								href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/elements/1.1/date"
-									><code>dcterms:date</code> property</a> [[dcterms]] <a
-								data-cite="epub/#subexpression">associated with</a> [[epub-3]] the <a
-								href="#sec-evaluator-name">evaluator's name</a>.</p>
+								href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#date"
+									><code>dcterms:date</code> property</a> [[dcterms]].</p>
+
+						<p>If <a href="#sec-conf-num-express">more than one conformance claim</a> is made, <a
+								data-cite="epub/#subexpression">associate</a> [[epub-3]] the date with the <a
+								href="#sec-evaluator-name">evaluator</a>.</p>
 
 						<p>It is REQUIRED that the date string conform to [[iso8601-1]], particularly the subset
 							expressed in W3C Date and Time Formats [[datetime]], as such strings are both human and
 							machine readable.</p>
 
 						<aside class="example" title="Expressing the evaluation date">
+							<pre>&lt;metadata …>
+   …
+   &lt;meta
+       property="dcterms:date">
+      2021-09-07
+   &lt;/meta>
+   …
+&lt;/metadata></pre>
+						</aside>
+
+						<aside class="example" title="Expressing the evaluation date when there is more than one claim">
+							<p>In this example, the <code>refines</code> attribute associates the date with the
+								evaluator.</p>
 							<pre>&lt;metadata …>
    …
    &lt;meta
@@ -1305,7 +1335,12 @@
 							content, include that information in an <a href="#certifierCredential"><code
 									id="a11y-certifierCredential">a11y:certifierCredential</code> properties</a>
 							<a data-cite="epub/#subexpression">associated with</a> [[epub-3]] the <a
-								href="#sec-evaluator-name">evaluator's name</a>.</p>
+								href="#sec-evaluator-name">evaluator</a>.</p>
+
+						<p>If there is more than one evaluator, or <a href="#sec-conf-num-express">more than one
+								conformance claim</a> is made, <a data-cite="epub/#subexpression">associate</a>
+							[[epub-3]] the credential with the applicable <a href="#sec-evaluator-name"
+							>evaluator</a>.</p>
 
 						<div class="note">
 							<p>Although it is possible to use a URL as the value of the
@@ -1317,19 +1352,28 @@
 						</div>
 
 						<aside class="example" title="Expressing a basic credential">
+							<pre>&lt;metadata …>
+   …
+   &lt;meta
+       property="a11y:certifiedBy">
+      EPUB Accessibility Evaluator
+   &lt;/meta>
+   
+   &lt;meta
+       property="a11y:certifierCredential">
+      A+ Accessibility Rating
+   &lt;/meta>
+   …
+&lt;/metadata></pre>
+						</aside>
+
+						<aside class="example" title="Expressing a credential when there is more than one evaluator">
 							<p>In this example, the <code>refines</code> attribute associates the credential with the
 								certifier.</p>
 							<pre>&lt;metadata …>
    …
    &lt;meta
-       property="dcterms:conformsTo"
-       id="conf">
-     EPUB Accessibility 1.2 - WCAG 2.2 Level AA
-   &lt;/meta>
-   
-   &lt;meta
        property="a11y:certifiedBy"
-       refines="#conf"
        id="certifier">
       EPUB Accessibility Evaluator
    &lt;/meta>
@@ -1339,6 +1383,7 @@
        refines="#certifier">
       A+ Accessibility Rating
    &lt;/meta>
+   …
 &lt;/metadata></pre>
 						</aside>
 					</section>
@@ -1348,13 +1393,34 @@
 
 						<p>If the evaluator provides a publicly-readable report of its assessment, provide a link to the
 							assessment in an <a href="#certifierReport"><code id="a11y-certifierReport"
-									>a11y:certifierReport</code> property</a>
-							<a data-cite="epub/#subexpression">associated with</a> [[epub-3]] the <a
-								href="#sec-evaluator-name">evaluator's name</a>.</p>
+									>a11y:certifierReport</code> property</a>.</p>
+
+						<p>If <a href="#sec-conf-num-express">more than one conformance claim</a> is made, <a
+								data-cite="epub/#subexpression">associate</a> [[epub-3]] the report with the <a
+								href="#sec-evaluator-name">evaluator</a>.</p>
 
 						<aside class="example" title="An external accessibility report">
 							<p>The following example shows a link to an accessibility report hosted on a web site.</p>
 							<pre>&lt;metadata …>
+   …
+   &lt;meta
+       property="dcterms:conformsTo"
+       id="conf">
+     EPUB Accessibility 1.2 - WCAG 2.2 Level AA
+   &lt;/meta>
+
+   &lt;link
+       rel="a11y:certifierReport"
+       href="http://www.example.com/a11y/report/9780000000001"/>
+   …
+&lt;/metadata></pre>
+						</aside>
+
+						<aside class="example" title="An accessibility report when there are multiple claims">
+							<p>The following example uses the <code>refines</code> attribute to link the accessibility
+								report to the evaluator.</p>
+							<pre>&lt;metadata …>
+   …
    &lt;meta
        property="dcterms:conformsTo"
        id="conf">
@@ -1372,13 +1438,15 @@
        rel="a11y:certifierReport"
        refines="#certifier"
        href="http://www.example.com/a11y/report/9780000000001"/>
+   …
 &lt;/metadata></pre>
 						</aside>
 
 						<aside class="example" title="A local accessibility report">
 							<p>The following example shows a link to an accessibility report included in the <a
-									data-cite="epub/#dfn-epub-container">EPUB container</a>.</p>
+									data-cite="epub-3#dfn-epub-container">EPUB container</a>.</p>
 							<pre>&lt;metadata …>
+   …
    &lt;meta
        property="dcterms:conformsTo"
        id="conf">
@@ -1396,6 +1464,7 @@
        rel="a11y:certifierReport"
        refines="#certifier"
        href="reports/a11y.xhtml"/>
+   …
 &lt;/metadata></pre>
 						</aside>
 					</section>
@@ -1409,7 +1478,7 @@
 							It is not a conformance requirement of this specification.</p>
 					</div>
 
-					<p>How long a conformance evaluation of an <a data-cite="epub/#dfn-epub-publication">EPUB
+					<p>How long a conformance evaluation of an <a data-cite="epub-3#dfn-epub-publication">EPUB
 							publication</a> is good for is a complex question. Unlike web sites, which are continuously
 						evolving, EPUB publications often do not get updated again after their initial publication. As a
 						result, an unmodified EPUB publication will always conform to its last evaluation.</p>
@@ -1425,7 +1494,7 @@
 
 					<ul>
 						<li>modifications to the nature or order of markup in <a
-								data-cite="epub/#dfn-epub-content-document">EPUB content documents</a>;</li>
+								data-cite="epub-3#dfn-epub-content-document">EPUB content documents</a>;</li>
 						<li>additions or modifications to images that convey information;</li>
 						<li>modifications to formatting that affects the readability (e.g., contrast); and</li>
 						<li>additions or modifications to interactive controls, forms, etc.</li>
@@ -1448,7 +1517,7 @@
 						<li>additions or modifications to decorative images;</li>
 						<li>modifications to the formatting that do not affect the understanding of the content or
 							change the text display; and</li>
-						<li>modifications to <a data-cite="epub/#dfn-package-document">package document</a>
+						<li>modifications to <a data-cite="epub-3#dfn-package-document">package document</a>
 							metadata.</li>
 					</ul>
 
@@ -1475,9 +1544,9 @@
 					a specific need or reading modality is often not conformant to WCAG exactly because it targets a
 					specific audience.</p>
 
-				<p>For example, an <a data-cite="epub/#dfn-epub-publication">EPUB publication</a> with synchronized text
-					and audio can contain a full audio recording of the content but limit the text content to only the
-					major headings. In this case, the EPUB publication is consumable by users who needs to hear the
+				<p>For example, an <a data-cite="epub-3#dfn-epub-publication">EPUB publication</a> with synchronized
+					text and audio can contain a full audio recording of the content but limit the text content to only
+					the major headings. In this case, the EPUB publication is consumable by users who needs to hear the
 					content (i.e., they can listen to the full publication and can navigate between headings) but is not
 					usable by anyone who cannot hear the audio.</p>
 
@@ -1518,7 +1587,7 @@
 				<h3>Additional resources</h3>
 
 				<p>The following documents provide additional information on how to author accessible <a
-						data-cite="epub/#dfn-epub-publication">EPUB publications</a>:</p>
+						data-cite="epub-3#dfn-epub-publication">EPUB publications</a>:</p>
 
 				<dl>
 					<dt>
@@ -1593,7 +1662,7 @@
 			<h2>Distribution</h2>
 
 			<div class="note">
-				<p>Although <a data-cite="epub/#dfn-epub-publication">EPUB publications</a> do not have to meet the
+				<p>Although <a data-cite="epub-3#dfn-epub-publication">EPUB publications</a> do not have to meet the
 					recommendations in this section to conform to this specification, some jurisdictions require EPUB
 					publications to follow similar practices. <a
 						href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32019L0882">Directive
@@ -1601,7 +1670,7 @@
 					the European Union.</p>
 			</div>
 
-			<p>The creation of accessible <a data-cite="epub/#dfn-epub-publication">EPUB publications</a> does not
+			<p>The creation of accessible <a data-cite="epub-3#dfn-epub-publication">EPUB publications</a> does not
 				guarantee that the publication will be obtainable or consumable by users in an accessible fashion.
 				Depending on how they are distributed, other factors will influence their overall accessibility. For
 				example, an accessible interface for locating and obtaining content is an essential part of the
@@ -1638,10 +1707,10 @@
 				new features are introduced by this specification.</p>
 
 			<p>The inclusion of accessibility metadata similarly does not introduce security or privacy issues, as
-				describing an <a data-cite="epub/#dfn-epub-publication">EPUB publication</a> only provides a general
+				describing an <a data-cite="epub-3#dfn-epub-publication">EPUB publication</a> only provides a general
 				idea of its suitability for different user groups.</p>
 
-			<p>The use of accessibility metadata in <a data-cite="epub/#dfn-epub-reading-system">reading systems</a>,
+			<p>The use of accessibility metadata in <a data-cite="epub-3#dfn-epub-reading-system">reading systems</a>,
 				bookstores and any other interface that can build a profile of the user, on the other hand, has the
 				potential to violate the user's privacy. While it might seem helpful to store and anticipate the type of
 				content a user is most likely to consume, for example, or how best to initiate its playback, developers
@@ -1659,7 +1728,7 @@
 		<section id="app-optimized-pubs" class="appendix informative">
 			<h2>Guidelines for optimized publication standards</h2>
 
-			<p>An optimized <a data-cite="epub/#dfn-epub-publication">EPUB publication</a> is one that has been created
+			<p>An optimized <a data-cite="epub-3#dfn-epub-publication">EPUB publication</a> is one that has been created
 				to address a specific accessibility need, as discussed in <a href="#sec-targeted-accessibility"
 				></a>.</p>
 
@@ -1750,8 +1819,8 @@
 					<h4>About this vocabulary</h4>
 
 					<p>This vocabulary defines properties for describing the accessibility of <a
-							data-cite="epub/#dfn-epub-publication">EPUB publications</a> in the <a
-							data-cite="epub/#dfn-package-document">package document</a> metadata.</p>
+							data-cite="epub-3#dfn-epub-publication">EPUB publications</a> in the <a
+							data-cite="epub-3#dfn-package-document">package document</a> metadata.</p>
 				</section>
 
 				<section id="app-vocab-ref">
@@ -1762,7 +1831,7 @@
 
 					<p>This specification reserves the prefix "<code>a11y:</code>" for use with properties in this
 						vocabulary. It is not required to declare the prefix in the <a
-							data-cite="epub/#dfn-package-document">package document</a>.</p>
+							data-cite="epub-3#dfn-package-document">package document</a>.</p>
 				</section>
 			</section>
 
@@ -1783,7 +1852,7 @@
 						<tr>
 							<th>Description:</th>
 							<td>Identifies a party responsible for the testing and certification of the accessibility of
-								an <a data-cite="epub/#dfn-epub-publication">EPUB publication</a>.</td>
+								an <a data-cite="epub-3#dfn-epub-publication">EPUB publication</a>.</td>
 						</tr>
 						<tr>
 							<th>Allowed value(s):</th>
@@ -1796,11 +1865,17 @@
 							<td>One or more</td>
 						</tr>
 						<tr>
+							<th>Extends:</th>
+							<td>
+								<a href="#dcterms-conformsTo"><code>dcterms:conformsTo</code></a> when an EPUB
+								publication contains multiple conformance statements.</td>
+						</tr>
+						<tr>
 							<th>Example:</th>
 							<td>
 								<pre>&lt;meta
-property="a11y:certifiedBy">
-Accessibility Testers Group
+    property="a11y:certifiedBy">
+   Accessibility Testers Group
 &lt;/meta></pre>
 							</td>
 						</tr>
@@ -1833,7 +1908,6 @@ Accessibility Testers Group
 						<tr>
 							<th>Cardinality:</th>
 							<td>Zero or more</td>
-
 						</tr>
 						<tr>
 							<th>Extends:</th>
@@ -1845,14 +1919,14 @@ Accessibility Testers Group
 							<th>Example:</th>
 							<td>
 								<pre>&lt;meta
-property="a11y:certifiedBy"
-id="certifier">
-Accessibility Testers Group
+    property="a11y:certifiedBy"
+    id="certifier">
+   Accessibility Testers Group
 &lt;/meta>
 &lt;meta
-property="a11y:certifierCredential"
-refines="#certifier">
-DAISY OK
+    property="a11y:certifierCredential"
+    refines="#certifier">
+   DAISY OK
 &lt;/meta></pre>
 							</td>
 						</tr>
@@ -1888,23 +1962,15 @@ DAISY OK
 						<tr>
 							<th>Extends:</th>
 							<td>
-								<a href="#certifiedBy">
-									<code>certifiedBy</code>
-								</a>
-							</td>
+								<a href="#certifiedBy"><code>certifiedBy</code></a> when an EPUB publication contains
+								multiple conformance statements.</td>
 						</tr>
 						<tr>
 							<th>Example:</th>
 							<td>
-								<pre>&lt;meta
-property="a11y:certifiedBy"
-id="certifier">
-Accessibility Testers Group
-&lt;/meta>
-&lt;link
-rel="a11y:certifierReport"
-refines="#certifier"
-href="https://example.com/a11y-report/"/></pre>
+								<pre>&lt;link
+    rel="a11y:certifierReport"
+    href="https://example.com/a11y-report/"/></pre>
 							</td>
 						</tr>
 					</table>
@@ -1944,7 +2010,8 @@ href="https://example.com/a11y-report/"/></pre>
 						<tr>
 							<th>Extends:</th>
 							<td>Only applies to the EPUB publication. MUST NOT be used when the <a
-									data-cite="epub#attrdef-refines"><code>refines</code> attribute</a> is present.</td>
+									data-cite="epub-3#attrdef-refines"><code>refines</code> attribute</a> is
+								present.</td>
 						</tr>
 						<tr>
 							<th>Example:</th>
@@ -1974,6 +2041,9 @@ href="https://example.com/a11y-report/"/></pre>
 				<summary>Substantive changes since <a href="https://w3.org/TR/epub-a11y-11/">EPUB Accessibility
 					1.1</a></summary>
 				<ul>
+					<li>26-Mar-2026: Clarified that the <code>refines</code> attribute is only needed to chain
+						accessibility metadata statements together when there are multiple conformance claims. See <a
+							href="https://github.com/w3c/epub-specs/issues/2846">issue 2846</a>.</li>
 					<li>05-Sept-2025: Added a note to the evaluator credential field that while URLs are valid values
 						they will typically require additional processing for display. See <a
 							href="https://github.com/w3c/epub-specs/issues/2112">issue 2112</a>.</li>
